@@ -35,7 +35,7 @@ public class WelcomeWorld extends World
     {
         if(play.touchingCursor()) //can u guys figure out why this isnt working
         {
-            Greenfoot.setWorld(new GameWorld()); 
+            Greenfoot.setWorld(new ChoosingGamemodes()); 
         }
     }
 }
