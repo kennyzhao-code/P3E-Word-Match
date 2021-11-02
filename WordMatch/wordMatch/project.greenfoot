@@ -1,4 +1,5 @@
 #Greenfoot project file
+<<<<<<< Updated upstream
 dependency1.from=GameWorld
 dependency1.to=Queue
 dependency1.type=UsesDependency
@@ -15,6 +16,27 @@ editor.fx.0.y=0
 height=1003
 package.numDependencies=3
 package.numTargets=4
+=======
+dependency1.from=ChoosingGamemodes
+dependency1.to=Button
+dependency1.type=UsesDependency
+dependency2.from=ChoosingGamemodes
+dependency2.to=GameWorld
+dependency2.type=UsesDependency
+dependency3.from=WelcomeWorld
+dependency3.to=Button
+dependency3.type=UsesDependency
+dependency4.from=WelcomeWorld
+dependency4.to=ChoosingGamemodes
+dependency4.type=UsesDependency
+editor.fx.0.height=728
+editor.fx.0.width=800
+editor.fx.0.x=464
+editor.fx.0.y=126
+height=998
+package.numDependencies=4
+package.numTargets=7
+>>>>>>> Stashed changes
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -50,6 +72,7 @@ target3.type=ClassTarget
 target3.width=120
 target3.x=0
 target3.y=0
+<<<<<<< Updated upstream
 target4.height=50
 target4.name=WelcomeWorld
 target4.showInterface=false
@@ -62,3 +85,38 @@ width=1728
 world.lastInstantiated=WelcomeWorld
 xPosition=100
 yPosition=38
+=======
+target4.height=70
+target4.name=ChoosingGamemodes
+target4.showInterface=false
+target4.type=ClassTarget
+target4.width=150
+target4.x=0
+target4.y=0
+target5.height=50
+target5.name=GameWorld
+target5.showInterface=false
+target5.type=ClassTarget
+target5.width=90
+target5.x=0
+target5.y=0
+target6.height=70
+target6.name=Queue
+target6.showInterface=false
+target6.type=ClassTarget
+target6.width=120
+target6.x=0
+target6.y=0
+target7.height=50
+target7.name=WelcomeWorld
+target7.showInterface=false
+target7.type=ClassTarget
+target7.width=110
+target7.x=0
+target7.y=0
+version=3.0.0
+width=1728
+world.lastInstantiated=GameWorld
+xPosition=0
+yPosition=41
+>>>>>>> Stashed changes
