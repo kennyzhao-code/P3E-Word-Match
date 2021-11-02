@@ -11,6 +11,7 @@ dependency3.type=UsesDependency
 dependency4.from=WelcomeWorld
 dependency4.to=Button
 dependency4.type=UsesDependency
+<<<<<<< Updated upstream
 dependency5.from=WelcomeWorld
 dependency5.to=ChoosingGamemodes
 dependency5.type=UsesDependency
@@ -20,6 +21,14 @@ editor.fx.0.x=-8
 editor.fx.0.y=-8
 height=1056
 package.numDependencies=5
+=======
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=552
+editor.fx.0.y=100
+height=1056
+package.numDependencies=4
+>>>>>>> Stashed changes
 package.numTargets=8
 project.charset=windows-1252
 publish.hasSource=false
