@@ -56,13 +56,13 @@ public class ChoosingGamemodes extends World
             Greenfoot.setWorld(new GameWorld());
         }
         
-        if(words3.touchingCursor())
+        if(words4.touchingCursor())
         {
             x = 4;
             Greenfoot.setWorld(new GameWorld());
         }
         
-        if(words3.touchingCursor())
+        if(words5.touchingCursor())
         {
             x = 5;
             Greenfoot.setWorld(new GameWorld());
@@ -71,20 +71,9 @@ public class ChoosingGamemodes extends World
     }
     
     
-    public int threeWords()
+    public int numberWords()
     {
         return x;
     }
-    
-    public int fourWords()
-    {
-        return x;
-    }
-    
-    public int fiveWords()
-    {
-        return x;
-    }
-    
-    
+      
 }
