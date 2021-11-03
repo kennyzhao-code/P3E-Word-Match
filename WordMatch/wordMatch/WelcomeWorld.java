@@ -17,18 +17,18 @@ public class WelcomeWorld extends World
     Button instructions;
     public WelcomeWorld()
     {            
-        super(1280, 720, 1);
+        super(900, 650, 1);
         Font titleFont = new Font("Calibri", true, false, 40);
         GreenfootImage title = new GreenfootImage("cooltext396141752577605.png");
         play = new Button("Play");
         instructions = new Button("Instructions"); 
-        GreenfootImage background = new GreenfootImage("abstract_geometric_triangle_background-wallpaper-1280x720.jpg"); 
+        GreenfootImage background = new GreenfootImage("anagrams.jpeg"); 
         background.setFont(titleFont);
         background.setColor(Color.BLACK); 
         setBackground(background); 
-        background.drawImage(title, 400, 100); 
-        addObject(play, 400, 400); 
-        addObject(instructions, 800, 400); 
+        background.drawImage(title, 230, 150); 
+        addObject(play, 300, 400); 
+        addObject(instructions, 600, 400); 
 
     }
     public void act()
