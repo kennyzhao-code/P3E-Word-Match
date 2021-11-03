@@ -18,13 +18,22 @@ public class GameWorld extends World
     //Queue to check if the word exist 
     Queue<Character> word = new Queue<Character>(); 
     //arraylist to add the objects to the screen 
-    ArrayList<Letters> let = new ArrayList<Letters>(); 
+    ArrayList<Letters> let = new ArrayList<Letters>();
+    
+    //Hashmap to store the positions of each letter 
+    HashMap<Letters, Integer> pos = new HashMap<Letters, Integer>(); 
+    //Queue to put store and return back the positions of each integer 
+    Queue<Integer> posi = new Queue<Integer>();  
+    //Arraylist to store which letters where selected for returning
+    ArrayList<Letters> position = new ArrayList<Letters>(); 
+    
     public GameWorld()
     {    
         super(1280, 720, 1);
         
-        //adding the ibecjts to the arraylist 
+        //adding the objects to the arraylist 
         int x = 400; 
+        int p = 400; 
         char[] ch = {'a', 'p', 't', 'r', 'e', 'm', 's', 'b', 'o', 'n', 'w'};
         for(int i = 0; i < 11; i++)
         {
@@ -43,6 +52,13 @@ public class GameWorld extends World
             wordStorage.put(let.get(i), ch[i]); 
         }
         
+        //hashamap to store all the positions of every single letter 
+        for(int i = 0; i < 11; i++ ) 
+        {
+            pos.put(let.get(i), p);
+            p = p + 50; 
+        }
+        
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
         addObject(scoreLabel,50,50); 
@@ -57,28 +73,34 @@ public class GameWorld extends World
     
     public void act()
     {
-        int x =  100; 
+       
+        int x =  300; 
         int y = x + 50; 
+        int z = 500; 
         //
         if(Greenfoot.mouseClicked(let.get(0)))
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(0))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(0))); 
+            //adding letter to array to track to return 
+            position.add(let.get(0)); 
             
             if((let.get(1)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(0).setLocation(x, 300); 
+                let.get(0).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(0).setLocation(y,300);
+                let.get(0).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(0).setLocation(x,300); 
+                let.get(0).setLocation(x,z); 
             }
         }
         
@@ -87,21 +109,25 @@ public class GameWorld extends World
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(1))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(1))); 
+            //adding letter to array to track to return 
+            position.add(let.get(1)); 
 
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(1).setLocation(x, 300); 
+                let.get(1).setLocation(x, z); 
             }
             
             else if((let.get(0)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(1).setLocation(y,300);
+                let.get(1).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(1).setLocation(x,300); 
+                let.get(1).setLocation(x,z); 
             }
         }
         
@@ -109,22 +135,26 @@ public class GameWorld extends World
         if(Greenfoot.mouseClicked(let.get(2)))
         {
             //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(2))); 
+            word.enqueue(wordStorage.get(let.get(2)));
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(2))); 
+            //adding letter to array to track to return 
+            position.add(let.get(2)); 
             
             if((let.get(0)).getX() != x && (let.get(1)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(2).setLocation(x, 300); 
+                let.get(2).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(0)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(2).setLocation(y,300);
+                let.get(2).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(2).setLocation(x,300); 
+                let.get(2).setLocation(x,z); 
             }
         }
         
@@ -133,21 +163,25 @@ public class GameWorld extends World
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(3))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(3))); 
+            //adding letter to array to track to return 
+            position.add(let.get(3)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(1)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(3).setLocation(x, 300); 
+                let.get(3).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(0)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(3).setLocation(y,300);
+                let.get(3).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(3).setLocation(x,300); 
+                let.get(3).setLocation(x,z); 
             }
         }
         
@@ -157,21 +191,25 @@ public class GameWorld extends World
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(4))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(4))); 
+            //adding letter to array to track to return 
+            position.add(let.get(4)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(1)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(4).setLocation(x, 300); 
+                let.get(4).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(0)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(4).setLocation(y,300);
+                let.get(4).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(4).setLocation(x,300); 
+                let.get(4).setLocation(x,z); 
             }
         }
         
@@ -181,21 +219,25 @@ public class GameWorld extends World
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(5))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(5))); 
+            //adding letter to array to track to return 
+            position.add(let.get(5)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(1)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(5).setLocation(x, 300); 
+                let.get(5).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(0)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(5).setLocation(y,300);
+                let.get(5).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(5).setLocation(x,300); 
+                let.get(5).setLocation(x,z); 
             }
         }
         
@@ -205,21 +247,25 @@ public class GameWorld extends World
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(6))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(6))); 
+            //adding letter to array to track to return 
+            position.add(let.get(6)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(1)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(6).setLocation(x, 300); 
+                let.get(6).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(0)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(6).setLocation(y,300);
+                let.get(6).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(6).setLocation(x,300); 
+                let.get(6).setLocation(x,z); 
             }
         }
         
@@ -228,21 +274,25 @@ public class GameWorld extends World
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(7))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(7))); 
+            //adding letter to array to track to return 
+            position.add(let.get(7)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(1)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(7).setLocation(x, 300); 
+                let.get(7).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(0)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(7).setLocation(y,300);
+                let.get(7).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(7).setLocation(x,300); 
+                let.get(7).setLocation(x,z); 
             }
         }
         
@@ -251,21 +301,25 @@ public class GameWorld extends World
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(8))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(8))); 
+            //adding letter to array to track to return 
+            position.add(let.get(8)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(1)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(8).setLocation(x, 300); 
+                let.get(8).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(0)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(8).setLocation(y,300);
+                let.get(8).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(8).setLocation(x,300); 
+                let.get(8).setLocation(x,z); 
             }
         }
         
@@ -275,21 +329,25 @@ public class GameWorld extends World
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(9))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(9))); 
+            //adding letter to array to track to return 
+            position.add(let.get(9)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((1)).getX() != x && let.get((10)).getX() != x)
             {
-                let.get(9).setLocation(x, 300); 
+                let.get(9).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((0)).getX() != y && let.get((10)).getX() != y)
             {
-                let.get(9).setLocation(y,300);
+                let.get(9).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(9).setLocation(x,300); 
+                let.get(9).setLocation(x,z); 
             }
         }
         
@@ -298,21 +356,25 @@ public class GameWorld extends World
         {
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(10))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(10))); 
+            //adding letter to array to track to return 
+            position.add(let.get(10)); 
             
             if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((1)).getX() != x)
             {
-                let.get(10).setLocation(x, 300); 
+                let.get(10).setLocation(x, z); 
             }
             
             else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((0)).getX() != y)
             {
-                let.get(10).setLocation(y,300);
+                let.get(10).setLocation(y,z);
             }
             
             else
             {
                 x = x + 100;
-                let.get(10).setLocation(x,300); 
+                let.get(10).setLocation(x,z); 
             }
         }
         
@@ -327,11 +389,29 @@ public class GameWorld extends World
             
             if((String.valueOf(compare)).equals("art"))
             {
-                increaseScore();             
+                
+                increaseScore(); 
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                }
+                position.clear(); 
+                
+                
+                
+            }
+            else{
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                }
+                position.clear(); 
             }
             
         }
-        
+    
+    
+    
     }
 
 }
