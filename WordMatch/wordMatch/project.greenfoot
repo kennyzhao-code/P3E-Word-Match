@@ -1,4 +1,5 @@
 #Greenfoot project file
+<<<<<<< HEAD
 dependency1.from=WinWorld
 dependency1.to=Button
 dependency1.type=UsesDependency
@@ -49,6 +50,36 @@ height=1056
 package.numDependencies=11
 package.numTargets=12
 >>>>>>> origin/Endscreen
+=======
+dependency1.from=InstructionWorld
+dependency1.to=Button
+dependency1.type=UsesDependency
+dependency2.from=InstructionWorld
+dependency2.to=WelcomeWorld
+dependency2.type=UsesDependency
+dependency3.from=ChoosingGamemodes
+dependency3.to=Button
+dependency3.type=UsesDependency
+dependency4.from=ChoosingGamemodes
+dependency4.to=GameWorld
+dependency4.type=UsesDependency
+dependency5.from=WelcomeWorld
+dependency5.to=Button
+dependency5.type=UsesDependency
+dependency6.from=WelcomeWorld
+dependency6.to=ChoosingGamemodes
+dependency6.type=UsesDependency
+dependency7.from=WelcomeWorld
+dependency7.to=InstructionWorld
+dependency7.type=UsesDependency
+editor.fx.0.height=553
+editor.fx.0.width=920
+editor.fx.0.x=354
+editor.fx.0.y=172
+height=1056
+package.numDependencies=7
+package.numTargets=8
+>>>>>>> origin/Instructions-world
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -114,6 +145,7 @@ target3.width=120
 target3.x=0
 target3.y=0
 target4.height=50
+<<<<<<< HEAD
 target4.name=Reader
 target4.showInterface=false
 target4.type=ClassTarget
@@ -122,11 +154,22 @@ target4.x=0
 target4.y=0
 target5.height=50
 target5.name=InstructionWorld
+=======
+target4.name=InstructionWorld
+target4.showInterface=false
+target4.type=ClassTarget
+target4.width=110
+target4.x=0
+target4.y=0
+target5.height=50
+target5.name=ChoosingGamemodes
+>>>>>>> origin/Instructions-world
 target5.showInterface=false
 target5.type=ClassTarget
-target5.width=110
+target5.width=140
 target5.x=0
 target5.y=0
+<<<<<<< HEAD
 <<<<<<< HEAD
 target6.height=70
 target6.name=ChoosingGamemodes
@@ -175,6 +218,29 @@ target9.type=ClassTarget
 target9.width=90
 target9.x=0
 target9.y=0
+=======
+target6.height=50
+target6.name=GameWorld
+target6.showInterface=false
+target6.type=ClassTarget
+target6.width=90
+target6.x=0
+target6.y=0
+target7.height=50
+target7.name=Queue
+target7.showInterface=false
+target7.type=ClassTarget
+target7.width=80
+target7.x=0
+target7.y=0
+target8.height=50
+target8.name=WelcomeWorld
+target8.showInterface=false
+target8.type=ClassTarget
+target8.width=110
+target8.x=0
+target8.y=0
+>>>>>>> origin/Instructions-world
 version=3.0.0
 <<<<<<< HEAD
 width=1728
