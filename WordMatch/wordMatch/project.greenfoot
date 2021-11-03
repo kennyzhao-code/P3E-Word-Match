@@ -20,6 +20,7 @@ dependency6.type=UsesDependency
 dependency7.from=WelcomeWorld
 dependency7.to=ChoosingGamemodes
 dependency7.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=1056
 editor.fx.0.width=1936
 editor.fx.0.x=-8
@@ -27,6 +28,15 @@ editor.fx.0.y=-8
 height=1056
 package.numDependencies=7
 package.numTargets=9
+=======
+editor.fx.0.height=728
+editor.fx.0.width=800
+editor.fx.0.x=464
+editor.fx.0.y=126
+height=998
+package.numDependencies=7
+package.numTargets=8
+>>>>>>> final-game-copy-for-thursday
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
