@@ -1,10 +1,6 @@
-<<<<<<< HEAD
+
 import java.util.ArrayList;
 import java.util.HashMap; 
-=======
-import java.util.HashMap; 
-import java.util.ArrayList;
->>>>>>> Reader
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.net.*;
 import java.io.*;
@@ -18,10 +14,6 @@ import java.util.ArrayList;
 
 public class GameWorld extends World
 {
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
     //label for the score
     Label scoreLabel; 
     public int score = 0; 
@@ -30,7 +22,6 @@ public class GameWorld extends World
     //Queue to check if the word exist 
     Queue<Character> word = new Queue<Character>(); 
     //arraylist to add the objects to the screen 
->>>>>>> final-game-copy-for-thursday
     ArrayList<Letters> let = new ArrayList<Letters>(); 
     public GameWorld()
     {    
@@ -49,13 +40,13 @@ public class GameWorld extends World
             this.addObject(let.get(i), x , 300); 
             x = x + 50; 
         }
-=======
+    }
     /**
      * Constructor for objects of class GameWorld.
      * 
      */
     ArrayList<Letters> lett = new ArrayList<Letters>();
-    public GameWorld()
+    /*public GameWorld()
     {    
         super(1280, 720, 1);
         int x = 100; 
@@ -72,8 +63,6 @@ public class GameWorld extends World
             x = x + 50; 
         }
         
-
->>>>>>> Reader
         
         //storing objects into the hashmap
         for(int i = 0; i < 11; i++)
@@ -85,7 +74,7 @@ public class GameWorld extends World
         scoreLabel = new Label(0, 80); 
         addObject(scoreLabel,50,50); 
         
-    }
+    } */
     
     public void increaseScore()
     {
@@ -95,7 +84,6 @@ public class GameWorld extends World
     
     public void act()
     {
-<<<<<<< HEAD
         int x =  100; 
         int y = x + 50; 
         //
@@ -164,7 +152,6 @@ public class GameWorld extends World
             {
                 x = x + 100;
                 let.get(2).setLocation(x,300); 
-=======
         HashMap<Letters, String> let = new HashMap<Letters, String>(); 
         Queue<Character> ans = new Queue<Character>(); 
         
@@ -497,8 +484,6 @@ public class GameWorld extends World
         }
     */
         
-     
->>>>>>> Reader
         
         //add the reader here 
         if(word.size() == 3)
@@ -516,6 +501,9 @@ public class GameWorld extends World
             
         }
         
+        }
+        }
+
     }
 
 }
