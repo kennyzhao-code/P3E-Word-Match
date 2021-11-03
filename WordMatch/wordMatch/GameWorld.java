@@ -71,6 +71,11 @@ public class GameWorld extends World
         scoreLabel.setValue(score); 
     }
     
+    public int score()
+    {
+        return score; 
+    }
+    
     public void act()
     {
        
