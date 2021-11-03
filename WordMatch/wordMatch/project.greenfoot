@@ -7,11 +7,15 @@ dependency2.to=GameWorld
 dependency2.type=UsesDependency
 dependency3.from=GameWorld
 <<<<<<< HEAD
+<<<<<<< HEAD
 dependency3.to=Letters
 =======
 <<<<<<< Updated upstream
 dependency3.to=Reader
 >>>>>>> Reader
+=======
+dependency3.to=Letters
+>>>>>>> final-game-copy-for-thursday
 dependency3.type=UsesDependency
 dependency4.from=WelcomeWorld
 dependency4.to=Button
@@ -19,6 +23,7 @@ dependency4.type=UsesDependency
 dependency5.from=WelcomeWorld
 dependency5.to=ChoosingGamemodes
 dependency5.type=UsesDependency
+<<<<<<< HEAD
 <<<<<<< HEAD
 editor.fx.0.height=0
 editor.fx.0.width=0
@@ -47,15 +52,22 @@ dependency5.type=UsesDependency
 dependency6.from=WelcomeWorld
 dependency6.to=ChoosingGamemodes
 dependency6.type=UsesDependency
+=======
+>>>>>>> final-game-copy-for-thursday
 editor.fx.0.height=728
 editor.fx.0.width=800
 editor.fx.0.x=464
 editor.fx.0.y=126
 height=998
+<<<<<<< HEAD
 package.numDependencies=6
 package.numTargets=7
 >>>>>>> Stashed changes
 >>>>>>> Reader
+=======
+package.numDependencies=5
+package.numTargets=8
+>>>>>>> final-game-copy-for-thursday
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -85,27 +97,37 @@ target2.width=120
 target2.x=0
 target2.y=0
 target3.height=70
+<<<<<<< HEAD
 target3.name=Reader
+=======
+target3.name=Label
+>>>>>>> final-game-copy-for-thursday
 target3.showInterface=false
 target3.type=ClassTarget
 target3.width=120
 target3.x=0
 target3.y=0
 <<<<<<< HEAD
+<<<<<<< HEAD
 target4.height=70
 target4.name=ChoosingGamemodes
+=======
+target4.height=50
+target4.name=Reader
+>>>>>>> final-game-copy-for-thursday
 target4.showInterface=false
 target4.type=ClassTarget
-target4.width=150
+target4.width=80
 target4.x=0
 target4.y=0
-target5.height=50
-target5.name=GameWorld
+target5.height=70
+target5.name=ChoosingGamemodes
 target5.showInterface=false
 target5.type=ClassTarget
-target5.width=90
+target5.width=150
 target5.x=0
 target5.y=0
+<<<<<<< HEAD
 =======
 <<<<<<< Updated upstream
 target4.height=50
@@ -161,19 +183,33 @@ target5.y=0
 >>>>>>> Reader
 target6.height=70
 target6.name=Queue
+=======
+target6.height=50
+target6.name=GameWorld
+>>>>>>> final-game-copy-for-thursday
 target6.showInterface=false
 target6.type=ClassTarget
-target6.width=120
+target6.width=90
 target6.x=0
 target6.y=0
-target7.height=50
-target7.name=WelcomeWorld
+target7.height=70
+target7.name=Queue
 target7.showInterface=false
 target7.type=ClassTarget
-target7.width=110
+target7.width=120
 target7.x=0
 target7.y=0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+target8.height=50
+target8.name=WelcomeWorld
+target8.showInterface=false
+target8.type=ClassTarget
+target8.width=110
+target8.x=0
+target8.y=0
+>>>>>>> final-game-copy-for-thursday
 version=3.0.0
 width=1728
 world.lastInstantiated=GameWorld
