@@ -3,7 +3,7 @@ import java.util.Iterator;
 public class Queue<T> implements Iterable<T>
 {
     private Node first, last;
-    
+    private int count = 0; 
     private class Node {
         private T item;
         private Node next;
@@ -20,8 +20,10 @@ public class Queue<T> implements Iterable<T>
         last.next = null;
         if (isEmpty()) {
             first = last;
+            count = count + 1; 
         } else {
             oldlast.next = last;
+            count = count + 1; 
         }
     }
     
@@ -31,9 +33,14 @@ public class Queue<T> implements Iterable<T>
         if (isEmpty()) {
             last = null;
         }
+        count = count - 1; 
         return item;
     }
     
+    public int size()
+    {
+        return count; 
+    }
     
     // To make this data structure work with for-each loops
     public Iterator<T> iterator() {
