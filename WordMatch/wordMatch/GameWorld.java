@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap; 
+import java.util.*;
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
@@ -11,8 +12,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class GameWorld extends World
 {
     //label for the score
-    Label scoreLabel; 
+    Label scoreLabel;
+    Label timerLabel;
+    
+    //score counter 
     public int score = 0; 
+    
     //Hashmap to map the image to the right letter 
     HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
     //Queue to check if the word exist 
@@ -25,7 +30,15 @@ public class GameWorld extends World
     //Queue to put store and return back the positions of each integer 
     Queue<Integer> posi = new Queue<Integer>();  
     //Arraylist to store which letters where selected for returning
-    ArrayList<Letters> position = new ArrayList<Letters>(); 
+    ArrayList<Letters> position = new ArrayList<Letters>();
+    
+    //Arraylist that adds the valid words to check if a user gets it right
+    List<String> valid;
+    
+    //timer for the game 
+    public int time = 15;
+    SimpleTimer timer = new SimpleTimer(); 
+    int counter = 0; 
     
     public GameWorld()
     {    
@@ -59,10 +72,15 @@ public class GameWorld extends World
             p = p + 50; 
         }
         
+        //adding in the valid words into the array 
+        String[] array = {"apt", "pat", "tap", "are", "ear", "era", "arm", "mar", "ram", "art","rat","tar","asp","pas","sap","spa","ate","eat","eta","tea","bat","stab","tab","now","own","won","opt","pot","top"};
+        valid = new ArrayList(Arrays.asList(array));
+        
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
+        timerLabel = new Label(15, 80); 
         addObject(scoreLabel,50,50); 
-        
+        addObject(timerLabel,1050, 50);
     }
     
     public void increaseScore()
@@ -81,8 +99,26 @@ public class GameWorld extends World
        
         int x =  300; 
         int y = x + 50; 
-        int z = 500; 
+        int z = 500;   
         //
+         
+         
+        if(timer.stopWatch() > 1000 && counter <= time + 1)
+            {
+                timerLabel.setValue(time - counter); 
+                timer.startStopWatch();
+                counter++; 
+            } 
+
+        
+        if(counter > time + 1 && score >= 1)
+        {
+            Greenfoot.setWorld(new WinWorld()); 
+        }
+        if(counter > time + 1 && score == 0)
+        {
+            Greenfoot.setWorld(new LoseWorld()); 
+        }
         if(Greenfoot.mouseClicked(let.get(0)))
         {
             //adding word to queue 
@@ -392,19 +428,21 @@ public class GameWorld extends World
                 compare[i] = word.dequeue(); 
             }
             
-            if((String.valueOf(compare)).equals("art"))
-            {
-                
-                increaseScore(); 
-                for(int i = 0; i < 3; i++)
-                {
-                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
-                }
-                position.clear(); 
-                
-                
-                
-            }
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                        
+                        increaseScore(); 
+                        for(int i = 0; i < 3; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in); 
+                        
+                        
+                    }
+            
             else{
                 for(int i = 0; i < 3; i++)
                 {
@@ -414,7 +452,7 @@ public class GameWorld extends World
             }
             
         }
-    
+        
     
     
     }

@@ -41,10 +41,17 @@ dependency8.type=UsesDependency
 dependency9.from=GameWorld
 dependency9.to=Label
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=728
 editor.fx.0.width=800
 editor.fx.0.x=464
 editor.fx.0.y=128
+=======
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
+>>>>>>> final-game-copy-for-thursday
 height=998
 package.numDependencies=14
 package.numTargets=12
