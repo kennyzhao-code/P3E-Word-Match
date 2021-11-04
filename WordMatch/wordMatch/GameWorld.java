@@ -39,7 +39,7 @@ public class GameWorld extends World
     public int time = 15;
     SimpleTimer timer = new SimpleTimer(); 
     int counter = 0; 
-    
+    GreenfootImage background; 
     public GameWorld()
     {    
         super(1280, 720, 1);
@@ -85,6 +85,8 @@ public class GameWorld extends World
         addObject(multiplier, 800, 500); 
         addObject(scoreLabel,50,50); 
         addObject(timerLabel,1200, 50);
+        background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
+        setBackground(background); 
     }
     
     public void increaseMultiplier()
