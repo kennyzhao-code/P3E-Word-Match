@@ -11,7 +11,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class GameWorld extends World
 {
     //label for the score
-    Label scoreLabel; 
+    Label scoreLabel;
+    Label timerLabel;
+    public int time = 15;
     public int score = 0; 
     //Hashmap to map the image to the right letter 
     HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
@@ -25,7 +27,9 @@ public class GameWorld extends World
     //Queue to put store and return back the positions of each integer 
     Queue<Integer> posi = new Queue<Integer>();  
     //Arraylist to store which letters where selected for returning
-    ArrayList<Letters> position = new ArrayList<Letters>(); 
+    ArrayList<Letters> position = new ArrayList<Letters>();
+    SimpleTimer timer = new SimpleTimer(); 
+    int counter = 0; 
     
     public GameWorld()
     {    
@@ -61,8 +65,9 @@ public class GameWorld extends World
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
+        timerLabel = new Label(15, 80); 
         addObject(scoreLabel,50,50); 
-        
+        addObject(timerLabel,1050, 50);
     }
     
     public void increaseScore()
@@ -76,8 +81,26 @@ public class GameWorld extends World
        
         int x =  300; 
         int y = x + 50; 
-        int z = 500; 
+        int z = 500;   
         //
+         
+         
+        if(timer.stopWatch() > 1000 && counter <= time + 1)
+            {
+                timerLabel.setValue(time - counter); 
+                timer.startStopWatch();
+                counter++; 
+            } 
+
+        
+        if(counter > time + 1 && score >= 1)
+        {
+            Greenfoot.setWorld(new WinWorld()); 
+        }
+        if(counter > time + 1 && score == 0)
+        {
+            Greenfoot.setWorld(new LoseWorld()); 
+        }
         if(Greenfoot.mouseClicked(let.get(0)))
         {
             //adding word to queue 
@@ -400,6 +423,19 @@ public class GameWorld extends World
                 
                 
             }
+            /*if((String.valueOf(compare)).equals("tar"))
+            {
+                
+                increaseScore(); 
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                }
+                position.clear(); 
+                
+                
+                
+            }*/ // this doesnt work index out of bounds
             else{
                 for(int i = 0; i < 3; i++)
                 {
@@ -409,7 +445,7 @@ public class GameWorld extends World
             }
             
         }
-    
+        
     
     
     }
