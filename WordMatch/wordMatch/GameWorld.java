@@ -100,7 +100,7 @@ public class GameWorld extends World
         int x =  300; 
         int y = x + 50; 
         int z = 500;   
-        //
+        
          
          
         if(timer.stopWatch() > 1000 && counter <= time + 1)
@@ -115,10 +115,12 @@ public class GameWorld extends World
         {
             Greenfoot.setWorld(new WinWorld()); 
         }
+        
         if(counter > time + 1 && score == 0)
         {
             Greenfoot.setWorld(new LoseWorld()); 
         }
+        
         if(Greenfoot.mouseClicked(let.get(0)))
         {
             //adding word to queue 

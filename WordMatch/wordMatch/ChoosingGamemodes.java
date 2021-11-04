@@ -39,8 +39,8 @@ public class ChoosingGamemodes extends World
         
         
         addObject(words3, 350, 400); 
-        addObject(words4, 650, 400);
-        addObject(words5, 950, 400);
+        //addObject(words4, 650, 400);
+        //addObject(words5, 950, 400);
         
         
     }
