@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
 
+#greenfoot
+project.greenfoot
+
 # Log file
 *.log
 
