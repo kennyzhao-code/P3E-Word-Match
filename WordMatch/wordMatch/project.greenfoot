@@ -20,17 +20,13 @@ dependency6.type=UsesDependency
 dependency7.from=WelcomeWorld
 dependency7.to=ChoosingGamemodes
 dependency7.type=UsesDependency
-editor.fx.0.height=728
-editor.fx.0.width=800
-editor.fx.0.x=464
-editor.fx.0.y=126
-height=998
+editor.fx.0.height=1056
+editor.fx.0.width=1936
+editor.fx.0.x=-8
+editor.fx.0.y=-8
+height=1056
 package.numDependencies=7
-<<<<<<< HEAD
 package.numTargets=12
-=======
-package.numTargets=8
->>>>>>> 28abff91ac936bf254f154bf525bc35da26bef78
 project.charset=windows-1252
 publish.hasSource=false
 publish.locked=true
@@ -39,9 +35,9 @@ publish.shortDesc=
 publish.tags=
 publish.title=
 publish.url=
-readme.height=60
+readme.height=58
 readme.name=@README
-readme.width=48
+readme.width=47
 readme.x=10
 readme.y=10
 simulation.speed=50
@@ -52,7 +48,6 @@ target1.type=ClassTarget
 target1.width=90
 target1.x=0
 target1.y=0
-<<<<<<< HEAD
 target10.height=70
 target10.name=ChoosingGamemodes
 target10.showInterface=false
@@ -74,10 +69,7 @@ target12.type=ClassTarget
 target12.width=110
 target12.x=0
 target12.y=0
-target2.height=70
-=======
 target2.height=50
->>>>>>> 28abff91ac936bf254f154bf525bc35da26bef78
 target2.name=Letters
 target2.showInterface=false
 target2.type=ClassTarget
@@ -98,36 +90,28 @@ target4.type=ClassTarget
 target4.width=80
 target4.x=0
 target4.y=0
-target5.height=70
-target5.name=ChoosingGamemodes
+target5.height=50
+target5.name=InstructionWorld
 target5.showInterface=false
 target5.type=ClassTarget
-target5.width=150
+target5.width=110
 target5.x=0
 target5.y=0
 target6.height=50
-<<<<<<< HEAD
 target6.name=LoseWorld
 target6.showInterface=false
 target6.type=ClassTarget
 target6.width=80
-=======
-target6.name=GameWorld
-target6.showInterface=false
-target6.type=ClassTarget
-target6.width=90
->>>>>>> 28abff91ac936bf254f154bf525bc35da26bef78
 target6.x=0
 target6.y=0
-target7.height=70
-target7.name=Queue
+target7.height=50
+target7.name=GameWorld
 target7.showInterface=false
 target7.type=ClassTarget
-target7.width=120
+target7.width=90
 target7.x=0
 target7.y=0
 target8.height=50
-<<<<<<< HEAD
 target8.name=WinWorld
 target8.showInterface=false
 target8.type=ClassTarget
@@ -138,19 +122,11 @@ target9.height=50
 target9.name=Button
 target9.showInterface=false
 target9.type=ClassTarget
-target9.width=90
+target9.width=80
 target9.x=0
 target9.y=0
-=======
-target8.name=WelcomeWorld
-target8.showInterface=false
-target8.type=ClassTarget
-target8.width=110
-target8.x=0
-target8.y=0
->>>>>>> 28abff91ac936bf254f154bf525bc35da26bef78
 version=3.0.0
-width=1728
+width=1936
 world.lastInstantiated=WelcomeWorld
 xPosition=0
-yPosition=38
+yPosition=0
