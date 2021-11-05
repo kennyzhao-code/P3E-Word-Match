@@ -22,11 +22,13 @@ public class WelcomeWorld extends World
         GreenfootImage title = new GreenfootImage("cooltext396141752577605.png");
         play = new Button("Play");
         instructions = new Button("Instructions"); 
+        
         GreenfootImage background = new GreenfootImage("anagrams.jpeg"); 
         background.setFont(titleFont);
         background.setColor(Color.BLACK); 
         setBackground(background); 
-        background.drawImage(title, 230, 150); 
+        background.drawImage(title, 230, 150);
+        
         addObject(play, 300, 400); 
         addObject(instructions, 600, 400); 
 

@@ -3,20 +3,26 @@ import java.util.HashMap;
 import java.util.*;
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class GameWorld here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+/*
+ * Game world class for 3 words 
  */
+
 public class GameWorld extends World
 {
-    //label for the score
+    //label for the game 
     Label scoreLabel;
     Label timerLabel;
+    Label multiplier; 
+    Label letterx; 
+    Label timeLeft;
+    Label scoreLeft;
+    
     
     //score counter 
     public int score = 0; 
+    
+    //mutiplier 
+    public int mul = 1; 
     
     //Hashmap to map the image to the right letter 
     HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
@@ -44,9 +50,14 @@ public class GameWorld extends World
     {    
         super(1280, 720, 1);
         
+        //bg of the map
+        GreenfootImage background = new GreenfootImage("bg1.jpg"); 
+        setBackground(background); 
+        
+        
         //adding the objects to the arraylist 
-        int x = 400; 
-        int p = 400; 
+        int r = 370; 
+        int p = 370; 
         char[] ch = {'a', 'p', 't', 'r', 'e', 'm', 's', 'b', 'o', 'n', 'w'};
         for(int i = 0; i < 11; i++)
         {
@@ -55,8 +66,8 @@ public class GameWorld extends World
         // printing the objetcs onto the screen 
         for(int i = 0; i < 11; i++)
         {
-            this.addObject(let.get(i), x , 300); 
-            x = x + 50; 
+            this.addObject(let.get(i), r , 313); 
+            r = r + 55; 
         }
         
         //storing objects into the hashmap
@@ -69,7 +80,7 @@ public class GameWorld extends World
         for(int i = 0; i < 11; i++ ) 
         {
             pos.put(let.get(i), p);
-            p = p + 50; 
+            p = p + 55; 
         }
         
         //adding in the valid words into the array 
@@ -79,38 +90,104 @@ public class GameWorld extends World
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
         timerLabel = new Label(15, 80); 
-        addObject(scoreLabel,50,50); 
-        addObject(timerLabel,1050, 50);
+        multiplier = new Label(1,60); 
+        letterx = new Label(" Multiplier: x", 50); 
+        timeLeft = new Label("Time Left: ", 80);
+        scoreLeft = new Label("Score:", 80); 
+        
+        addObject(letterx, 650, 500);
+        addObject(multiplier, 800, 500); 
+        addObject(scoreLabel,260,50); 
+        addObject(timerLabel,1200, 50);
+        addObject(timeLeft, 975, 50);
+        addObject(scoreLeft,125, 50 ); 
     }
     
+    //method to increase multiplier 
+    public void increaseMultiplier()
+    {
+        mul++; 
+        multiplier.setValue(mul); 
+    }
+    
+    //returns what the multiplier is (used for the increaseScore method)
+    public int curMul()
+    {
+        return mul; 
+    }
+    
+    //method to reset multiplier 
+    public void resetMultiplier()
+    {
+        mul = 1; 
+        multiplier.setValue(mul); 
+    }
+    
+    //method to increase the score 
     public void increaseScore()
     {
-        score++;
+        int curMultiplier = curMul();
+        int baseScore = 1; 
+        score = score + (baseScore * curMultiplier); 
         scoreLabel.setValue(score); 
     }
     
+    //medthod that returns the score for the end screen 
     public int score()
     {
         return score; 
     }
     
+    //method that moves the letters 
+    public void move(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k) 
+    {
+         if(Greenfoot.mouseClicked(let.get(a)))
+        {
+            //variables for changing the location 
+            int x =  253; 
+            int y = x + 55; 
+            int z = 505; 
+            
+            GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
+            image.drawImage(image, 500,500); 
+            
+            //adding word to queue 
+            word.enqueue(wordStorage.get(let.get(a))); 
+            //adding position to queue 
+            posi.enqueue(pos.get(let.get(a))); 
+            //adding letter to array to track to return 
+            position.add(let.get(a)); 
+
+            if((let.get(b)).getX() != x && (let.get(c)).getX() != x && (let.get(d)).getX() != x && (let.get(e)).getX() != x && (let.get(f)).getX() != x && (let.get(g)).getX() != x && (let.get(h)).getX() != x && (let.get(i)).getX() != x && let.get((j)).getX() != x && let.get((k)).getX() != x)
+            {
+                let.get(a).setLocation(x, z); 
+            }
+            
+            else if((let.get(b)).getX() != y && (let.get(c)).getX() != y && (let.get(d)).getX() != y && (let.get(e)).getX() != y && (let.get(f)).getX() != y && (let.get(g)).getX() != y && (let.get(h)).getX() != y && (let.get(i)).getX() != y && let.get((j)).getX() != y && let.get((k)).getX() != y)
+            {
+                let.get(a).setLocation(y,z);
+            }
+            
+            else
+            {
+                y = y + 50;
+                let.get(a).setLocation(x,z); 
+            }
+        }
+    }
+    
+    //actual game 
     public void act()
     {
-       
-        int x =  300; 
-        int y = x + 50; 
-        int z = 500;   
         
-         
-         
+        //in game timer 
         if(timer.stopWatch() > 1000 && counter <= time + 1)
-            {
-                timerLabel.setValue(time - counter); 
-                timer.startStopWatch();
-                counter++; 
-            } 
+        {
+            timerLabel.setValue(time - counter); 
+            timer.startStopWatch();
+            counter++; 
+        } 
 
-        
         if(counter > time + 1 && score >= 1)
         {
             Greenfoot.setWorld(new WinWorld()); 
@@ -121,307 +198,20 @@ public class GameWorld extends World
             Greenfoot.setWorld(new LoseWorld()); 
         }
         
-        if(Greenfoot.mouseClicked(let.get(0)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(0))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(0))); 
-            //adding letter to array to track to return 
-            position.add(let.get(0)); 
-            
-            if((let.get(1)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(0).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(0).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(0).setLocation(x,z); 
-            }
-        }
+        //methods for moving all 11 letters 
+        move(0,1,2,3,4,5,6,7,8,9,10);
+        move(1,0,2,3,4,5,6,7,8,9,10);
+        move(2,1,0,3,4,5,6,7,8,9,10);
+        move(3,1,2,0,4,5,6,7,8,9,10);
+        move(4,1,2,3,0,5,6,7,8,9,10);
+        move(5,1,2,3,4,0,6,7,8,9,10);
+        move(6,1,2,3,4,5,0,7,8,9,10);
+        move(7,1,2,3,4,5,6,0,8,9,10);
+        move(8,1,2,3,4,5,6,7,0,9,10);
+        move(9,1,2,3,4,5,6,7,8,0,10);
+        move(10,1,2,3,4,5,6,7,8,9,0);
         
-        //
-        if(Greenfoot.mouseClicked(let.get(1)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(1))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(1))); 
-            //adding letter to array to track to return 
-            position.add(let.get(1)); 
-
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(1).setLocation(x, z); 
-            }
-            
-            else if((let.get(0)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(1).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(1).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(2)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(2)));
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(2))); 
-            //adding letter to array to track to return 
-            position.add(let.get(2)); 
-            
-            if((let.get(0)).getX() != x && (let.get(1)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(2).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(0)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(2).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(2).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(3)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(3))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(3))); 
-            //adding letter to array to track to return 
-            position.add(let.get(3)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(1)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(3).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(0)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(3).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(3).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(4)))
-        {
-            
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(4))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(4))); 
-            //adding letter to array to track to return 
-            position.add(let.get(4)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(1)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(4).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(0)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(4).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(4).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(5)))
-        {
-            
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(5))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(5))); 
-            //adding letter to array to track to return 
-            position.add(let.get(5)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(1)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(5).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(0)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(5).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(5).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(6)))
-        {
-            
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(6))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(6))); 
-            //adding letter to array to track to return 
-            position.add(let.get(6)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(1)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(6).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(0)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(6).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(6).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(7)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(7))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(7))); 
-            //adding letter to array to track to return 
-            position.add(let.get(7)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(1)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(7).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(0)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(7).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(7).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(8)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(8))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(8))); 
-            //adding letter to array to track to return 
-            position.add(let.get(8)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(1)).getX() != x && let.get((9)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(8).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(0)).getX() != y && let.get((9)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(8).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(8).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(9)))
-        {
-            
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(9))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(9))); 
-            //adding letter to array to track to return 
-            position.add(let.get(9)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((1)).getX() != x && let.get((10)).getX() != x)
-            {
-                let.get(9).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((0)).getX() != y && let.get((10)).getX() != y)
-            {
-                let.get(9).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(9).setLocation(x,z); 
-            }
-        }
-        
-        //
-        if(Greenfoot.mouseClicked(let.get(10)))
-        {
-            //adding word to queue 
-            word.enqueue(wordStorage.get(let.get(10))); 
-            //adding position to queue 
-            posi.enqueue(pos.get(let.get(10))); 
-            //adding letter to array to track to return 
-            position.add(let.get(10)); 
-            
-            if((let.get(0)).getX() != x && (let.get(2)).getX() != x && (let.get(3)).getX() != x && (let.get(4)).getX() != x && (let.get(5)).getX() != x && (let.get(6)).getX() != x && (let.get(7)).getX() != x && (let.get(8)).getX() != x && let.get((9)).getX() != x && let.get((1)).getX() != x)
-            {
-                let.get(10).setLocation(x, z); 
-            }
-            
-            else if((let.get(1)).getX() != y && (let.get(2)).getX() != y && (let.get(3)).getX() != y && (let.get(4)).getX() != y && (let.get(5)).getX() != y && (let.get(6)).getX() != y && (let.get(7)).getX() != y && (let.get(8)).getX() != y && let.get((9)).getX() != y && let.get((0)).getX() != y)
-            {
-                let.get(10).setLocation(y,z);
-            }
-            
-            else
-            {
-                x = x + 100;
-                let.get(10).setLocation(x,z); 
-            }
-        }
-        
-        //add the reader here 
+        //checker for words  
         if(word.size() == 3)
         {
             char[] compare = new char[3]; 
@@ -430,27 +220,28 @@ public class GameWorld extends World
                 compare[i] = word.dequeue(); 
             }
             
-                if(valid.contains((String.valueOf(compare))))
+            if(valid.contains((String.valueOf(compare))))
+                {
+                        
+                    increaseScore(); 
+                    for(int i = 0; i < 3; i++)
                     {
-                        
-                        increaseScore(); 
-                        for(int i = 0; i < 3; i++)
-                        {
-                            (position.get(i)).setLocation(posi.dequeue(), 300);                     
-                        }
-                        position.clear(); 
-                        int in = valid.indexOf((String.valueOf(compare))); 
-                        valid.remove(in); 
-                        
-                        
+                        (position.get(i)).setLocation(posi.dequeue(), 313);                     
                     }
+                    position.clear(); 
+                    int in = valid.indexOf((String.valueOf(compare))); 
+                    valid.remove(in);   
+                    increaseMultiplier(); 
+                    
+                }
             
             else{
                 for(int i = 0; i < 3; i++)
                 {
-                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                    (position.get(i)).setLocation(posi.dequeue(), 313);                     
                 }
                 position.clear(); 
+                resetMultiplier(); 
             }
             
         }
