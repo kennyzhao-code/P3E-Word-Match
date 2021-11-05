@@ -5,6 +5,8 @@ public class Reader
 {
 
     static String threeWords = "http://www1.cs.columbia.edu/~kathy/cs4701/3.txt";
+    static String fourWords = "https://gist.githubusercontent.com/paulcc/3799331/raw/74207b4ee400469ddbb61d297dbd62f31a3407ce/gistfile1.txt"; 
+    static String fiveWords = "https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt";
     BufferedReader in;
     static String urlName = ""; 
     static ArrayList<String> words = new ArrayList<String>();  
