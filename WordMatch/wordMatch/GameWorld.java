@@ -37,9 +37,14 @@ public class GameWorld extends World
     Queue<Integer> posi = new Queue<Integer>();  
     //Arraylist to store which letters where selected for returning
     ArrayList<Letters> position = new ArrayList<Letters>();
-    
+    //Arraylist for words that fit the 3 letters of words
+    ArrayList<String> threeWords = new ArrayList<String>();
+    //Arraylist for words that fit the 4 letters of words
+    ArrayList<String> fourWords = new ArrayList<String>();
+    //Arraylist for words that fit the 5 letters of words
+    ArrayList<String> fiveWords = new ArrayList<String>();
     //Arraylist that adds the valid words to check if a user gets it right
-    List<String> valid;
+    ArrayList<String> valid;
     
     //timer for the game 
     public int time = 15;
@@ -56,50 +61,72 @@ public class GameWorld extends World
         //create new arrayList based off difficulty
         try 
         {
-            Reader.readInto(ChoosingGamemodes.numberWords());
+            Reader.readInto();
         }
         catch (Exception e)
         {
             
         }
-         
+        threeWords = Reader.readNum(3); 
+        fourWords = Reader.readNum(4);
+        fiveWords = Reader.readNum(5);
         int r = 370; 
         int p = 370; 
         char[] ch = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
-        char firstChar = ch[Greenfoot.getRandomNumber(27)];
-        char secondChar = ch[Greenfoot.getRandomNumber(27)];
-        char thirdChar = ch[Greenfoot.getRandomNumber(27)];
-        char[] realChars = {firstChar, secondChar, thirdChar}; 
-         
+        char firstChar = ch[Greenfoot.getRandomNumber(25)];
+        char secondChar = ch[Greenfoot.getRandomNumber(25)];
+        char thirdChar = ch[Greenfoot.getRandomNumber(25)];
+        char fourthChar = ch[Greenfoot.getRandomNumber(25)];
+        char fifthChar = ch[Greenfoot.getRandomNumber(25)];
+        char sixthChar = ch[Greenfoot.getRandomNumber(25)];
+        char seventhChar = ch[Greenfoot.getRandomNumber(25)];
+        char eighthChar = ch[Greenfoot.getRandomNumber(25)];
+        char ninthChar = ch[Greenfoot.getRandomNumber(25)];
+        char tenthChar = ch[Greenfoot.getRandomNumber(25)];
+        char eleventhChar = ch[Greenfoot.getRandomNumber(25)];
+        char[] realChars = {firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar};
+        
+        //adding in the valid words into the array 
+        if(ChoosingGamemodes.numberWords() == 3)
+        {
+            valid = Reader.readThree(threeWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        }
+        if(ChoosingGamemodes.numberWords() == 4)
+        {
+            valid = Reader.readFour(fourWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        }
+        if(ChoosingGamemodes.numberWords() == 5)
+        {
+            valid = Reader.readFive(fiveWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        }
+        
         //adding the objects to the arraylist
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 11; i++)
         {
             let.add(new Letters(realChars[i])); 
         }
         
         // printing the objetcs onto the screen 
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 11; i++)
         {
             this.addObject(let.get(i), r , 500); 
             r = r + 55; 
         }
         
         //storing objects into the hashmap
-        for(int i = 0; i < 3; i++)
+        for(int i = 0; i < 11; i++)
         {
             wordStorage.put(let.get(i), realChars[i]); 
         }
         
         //hashamap to store all the positions of every single letter 
-        for(int i = 0; i < 3; i++) 
+        for(int i = 0; i < 11; i++) 
         {
             pos.put(let.get(i), p);
             p = p + 55; 
         }
         
-        //adding in the valid words into the array 
-        valid = Reader.readThree(firstChar, secondChar, thirdChar);
-        check(); 
+         
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
@@ -117,13 +144,6 @@ public class GameWorld extends World
         addObject(scoreLeft,125, 50 ); 
     }
     
-    public void check()
-    {
-        for(int i = 0; i < valid.size(); i++)
-        {
-            System.out.println(valid.get(i)); 
-        }
-    }
     //method to increase multiplier 
     public void increaseMultiplier()
     {
@@ -160,7 +180,7 @@ public class GameWorld extends World
     }
     
     //method that moves the letters 
-    public void move(int a, int b, int c) 
+    public void move(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k) 
     {
          if(Greenfoot.mouseClicked(let.get(a)))
         {
@@ -179,12 +199,12 @@ public class GameWorld extends World
             //adding letter to array to track to return 
             position.add(let.get(a)); 
 
-            if((let.get(b)).getX() != x && (let.get(c)).getX() != x)
+            if((let.get(b)).getX() != x && (let.get(c)).getX() != x && (let.get(d)).getX() != x && (let.get(e)).getX() != x && (let.get(f)).getX() != x && (let.get(g)).getX() != x && (let.get(h)).getX() != x && (let.get(i)).getX() != x && let.get((j)).getX() != x && let.get((k)).getX() != x)
             {
                 let.get(a).setLocation(x, z); 
             }
             
-            else if((let.get(b)).getX() != y && (let.get(c)).getX() != y)
+            else if((let.get(b)).getX() != y && (let.get(c)).getX() != y && (let.get(d)).getX() != y && (let.get(e)).getX() != y && (let.get(f)).getX() != y && (let.get(g)).getX() != y && (let.get(h)).getX() != y && (let.get(i)).getX() != y && let.get((j)).getX() != y && let.get((k)).getX() != y)
             {
                 let.get(a).setLocation(y,z);
             }
@@ -220,11 +240,19 @@ public class GameWorld extends World
         }
         
         //methods for moving all 11 letters 
-        move(0,1,2);
-        move(1,0,2);
-        move(2,1,0); 
+        move(0,1,2,3,4,5,6,7,8,9,10);
+        move(1,0,2,3,4,5,6,7,8,9,10);
+        move(2,1,0,3,4,5,6,7,8,9,10);
+        move(3,1,2,0,4,5,6,7,8,9,10);
+        move(4,1,2,3,0,5,6,7,8,9,10);
+        move(5,1,2,3,4,0,6,7,8,9,10);
+        move(6,1,2,3,4,5,0,7,8,9,10);
+        move(7,1,2,3,4,5,6,0,8,9,10);
+        move(8,1,2,3,4,5,6,7,0,9,10);
+        move(9,1,2,3,4,5,6,7,8,0,10);
+        move(10,1,2,3,4,5,6,7,8,9,0); 
         
-        //checker for words  
+        //checker for words + this is the only part that isnt working as  need to make it if word size == into 4 and 5  
         if(word.size() == 3)
         {
             char[] compare = new char[3]; 
