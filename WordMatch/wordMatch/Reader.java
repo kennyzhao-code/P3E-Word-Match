@@ -9,7 +9,7 @@ public class Reader
     static String fiveWords = "https://www-cs-faculty.stanford.edu/~knuth/sgb-words.txt";
     BufferedReader in;
     static String urlName = ""; 
-    static ArrayList<String> words = new ArrayList<String>();  
+    public static ArrayList<String> words = new ArrayList<String>();  
     public Reader()
     {      
         
@@ -18,6 +18,14 @@ public class Reader
         if(x == 3)
         {
             urlName = threeWords; 
+        }
+        if(x == 4)
+        {
+            urlName = fourWords; 
+        }
+        if(x == 5)
+        {
+            urlName = fiveWords; 
         }
         URL url = new URL(urlName);
         BufferedReader in = new BufferedReader(
