@@ -16,7 +16,7 @@ public class Label extends Actor
     private String value;
     private int fontSize;
     private Color lineColor = Color.BLACK;
-    private Color fillColor = Color.WHITE;
+    private Color fillColor = new Color (243, 205, 162);
     
     private static final Color transparent = new Color(0,0,0,0);
 
