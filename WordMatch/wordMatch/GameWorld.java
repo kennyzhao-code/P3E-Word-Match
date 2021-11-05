@@ -51,7 +51,7 @@ public class GameWorld extends World
         super(1280, 720, 1);
         
         //bg of the map
-        GreenfootImage background = new GreenfootImage("bg1.jpg"); 
+        GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
         setBackground(background); 
         
         
@@ -66,7 +66,7 @@ public class GameWorld extends World
         // printing the objetcs onto the screen 
         for(int i = 0; i < 11; i++)
         {
-            this.addObject(let.get(i), r , 313); 
+            this.addObject(let.get(i), r , 500); 
             r = r + 55; 
         }
         
@@ -95,8 +95,8 @@ public class GameWorld extends World
         timeLeft = new Label("Time Left: ", 80);
         scoreLeft = new Label("Score:", 80); 
         
-        addObject(letterx, 650, 500);
-        addObject(multiplier, 800, 500); 
+        addObject(letterx, 650, 600);
+        addObject(multiplier, 800, 600); 
         addObject(scoreLabel,260,50); 
         addObject(timerLabel,1200, 50);
         addObject(timeLeft, 975, 50);
@@ -144,9 +144,9 @@ public class GameWorld extends World
          if(Greenfoot.mouseClicked(let.get(a)))
         {
             //variables for changing the location 
-            int x =  253; 
+            int x =  556; 
             int y = x + 55; 
-            int z = 505; 
+            int z = 300; 
             
             GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
             image.drawImage(image, 500,500); 
@@ -226,7 +226,7 @@ public class GameWorld extends World
                     increaseScore(); 
                     for(int i = 0; i < 3; i++)
                     {
-                        (position.get(i)).setLocation(posi.dequeue(), 313);                     
+                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
                     }
                     position.clear(); 
                     int in = valid.indexOf((String.valueOf(compare))); 
@@ -238,7 +238,7 @@ public class GameWorld extends World
             else{
                 for(int i = 0; i < 3; i++)
                 {
-                    (position.get(i)).setLocation(posi.dequeue(), 313);                     
+                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
                 }
                 position.clear(); 
                 resetMultiplier(); 
