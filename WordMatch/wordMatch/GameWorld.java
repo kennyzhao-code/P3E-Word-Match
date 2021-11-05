@@ -53,39 +53,53 @@ public class GameWorld extends World
         //bg of the map
         GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
         setBackground(background); 
-        
-        
-        //adding the objects to the arraylist 
+        //create new arrayList based off difficulty
+        try 
+        {
+            Reader.readInto(ChoosingGamemodes.numberWords());
+        }
+        catch (Exception e)
+        {
+            
+        }
+         
         int r = 370; 
         int p = 370; 
-        char[] ch = {'a', 'p', 't', 'r', 'e', 'm', 's', 'b', 'o', 'n', 'w'};
-        for(int i = 0; i < 11; i++)
+        char[] ch = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char firstChar = ch[Greenfoot.getRandomNumber(27)];
+        char secondChar = ch[Greenfoot.getRandomNumber(27)];
+        char thirdChar = ch[Greenfoot.getRandomNumber(27)];
+        char[] realChars = {firstChar, secondChar, thirdChar}; 
+         
+        //adding the objects to the arraylist
+        for(int i = 0; i < 3; i++)
         {
-            let.add(new Letters(ch[i]));
+            let.add(new Letters(realChars[i])); 
         }
+        
         // printing the objetcs onto the screen 
-        for(int i = 0; i < 11; i++)
+        for(int i = 0; i < 3; i++)
         {
             this.addObject(let.get(i), r , 500); 
             r = r + 55; 
         }
         
         //storing objects into the hashmap
-        for(int i = 0; i < 11; i++)
+        for(int i = 0; i < 3; i++)
         {
-            wordStorage.put(let.get(i), ch[i]); 
+            wordStorage.put(let.get(i), realChars[i]); 
         }
         
         //hashamap to store all the positions of every single letter 
-        for(int i = 0; i < 11; i++ ) 
+        for(int i = 0; i < 3; i++) 
         {
             pos.put(let.get(i), p);
             p = p + 55; 
         }
         
         //adding in the valid words into the array 
-        String[] array = {"apt", "pat", "tap", "are", "ear", "era", "arm", "mar", "ram", "art","rat","tar","asp","pas","sap","spa","ate","eat","eta","tea","bat","stab","tab","now","own","won","opt","pot","top"};
-        valid = new ArrayList(Arrays.asList(array));
+        valid = Reader.readThree(firstChar, secondChar, thirdChar);
+        check(); 
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
@@ -103,6 +117,13 @@ public class GameWorld extends World
         addObject(scoreLeft,125, 50 ); 
     }
     
+    public void check()
+    {
+        for(int i = 0; i < valid.size(); i++)
+        {
+            System.out.println(valid.get(i)); 
+        }
+    }
     //method to increase multiplier 
     public void increaseMultiplier()
     {
@@ -139,7 +160,7 @@ public class GameWorld extends World
     }
     
     //method that moves the letters 
-    public void move(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k) 
+    public void move(int a, int b, int c) 
     {
          if(Greenfoot.mouseClicked(let.get(a)))
         {
@@ -158,12 +179,12 @@ public class GameWorld extends World
             //adding letter to array to track to return 
             position.add(let.get(a)); 
 
-            if((let.get(b)).getX() != x && (let.get(c)).getX() != x && (let.get(d)).getX() != x && (let.get(e)).getX() != x && (let.get(f)).getX() != x && (let.get(g)).getX() != x && (let.get(h)).getX() != x && (let.get(i)).getX() != x && let.get((j)).getX() != x && let.get((k)).getX() != x)
+            if((let.get(b)).getX() != x && (let.get(c)).getX() != x)
             {
                 let.get(a).setLocation(x, z); 
             }
             
-            else if((let.get(b)).getX() != y && (let.get(c)).getX() != y && (let.get(d)).getX() != y && (let.get(e)).getX() != y && (let.get(f)).getX() != y && (let.get(g)).getX() != y && (let.get(h)).getX() != y && (let.get(i)).getX() != y && let.get((j)).getX() != y && let.get((k)).getX() != y)
+            else if((let.get(b)).getX() != y && (let.get(c)).getX() != y)
             {
                 let.get(a).setLocation(y,z);
             }
@@ -199,17 +220,9 @@ public class GameWorld extends World
         }
         
         //methods for moving all 11 letters 
-        move(0,1,2,3,4,5,6,7,8,9,10);
-        move(1,0,2,3,4,5,6,7,8,9,10);
-        move(2,1,0,3,4,5,6,7,8,9,10);
-        move(3,1,2,0,4,5,6,7,8,9,10);
-        move(4,1,2,3,0,5,6,7,8,9,10);
-        move(5,1,2,3,4,0,6,7,8,9,10);
-        move(6,1,2,3,4,5,0,7,8,9,10);
-        move(7,1,2,3,4,5,6,0,8,9,10);
-        move(8,1,2,3,4,5,6,7,0,9,10);
-        move(9,1,2,3,4,5,6,7,8,0,10);
-        move(10,1,2,3,4,5,6,7,8,9,0);
+        move(0,1,2);
+        move(1,0,2);
+        move(2,1,0); 
         
         //checker for words  
         if(word.size() == 3)
