@@ -50,9 +50,14 @@ public class GameWorld extends World
     {    
         super(1280, 720, 1);
         
+        //bg of the map
+        GreenfootImage background = new GreenfootImage("bg1.jpg"); 
+        setBackground(background); 
+        
+        
         //adding the objects to the arraylist 
-        int r = 400; 
-        int p = 400; 
+        int r = 370; 
+        int p = 370; 
         char[] ch = {'a', 'p', 't', 'r', 'e', 'm', 's', 'b', 'o', 'n', 'w'};
         for(int i = 0; i < 11; i++)
         {
@@ -61,8 +66,8 @@ public class GameWorld extends World
         // printing the objetcs onto the screen 
         for(int i = 0; i < 11; i++)
         {
-            this.addObject(let.get(i), r , 300); 
-            r = r + 50; 
+            this.addObject(let.get(i), r , 313); 
+            r = r + 55; 
         }
         
         //storing objects into the hashmap
@@ -75,7 +80,7 @@ public class GameWorld extends World
         for(int i = 0; i < 11; i++ ) 
         {
             pos.put(let.get(i), p);
-            p = p + 50; 
+            p = p + 55; 
         }
         
         //adding in the valid words into the array 
@@ -139,9 +144,12 @@ public class GameWorld extends World
          if(Greenfoot.mouseClicked(let.get(a)))
         {
             //variables for changing the location 
-            int x =  300; 
-            int y = x + 50; 
-            int z = 500; 
+            int x =  253; 
+            int y = x + 55; 
+            int z = 505; 
+            
+            GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
+            image.drawImage(image, 500,500); 
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(a))); 
@@ -218,7 +226,7 @@ public class GameWorld extends World
                     increaseScore(); 
                     for(int i = 0; i < 3; i++)
                     {
-                        (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                        (position.get(i)).setLocation(posi.dequeue(), 313);                     
                     }
                     position.clear(); 
                     int in = valid.indexOf((String.valueOf(compare))); 
@@ -230,7 +238,7 @@ public class GameWorld extends World
             else{
                 for(int i = 0; i < 3; i++)
                 {
-                    (position.get(i)).setLocation(posi.dequeue(), 300);                     
+                    (position.get(i)).setLocation(posi.dequeue(), 313);                     
                 }
                 position.clear(); 
                 resetMultiplier(); 
