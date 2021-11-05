@@ -39,14 +39,14 @@ public class ChoosingGamemodes extends World
         
         
         addObject(words3, 350, 400); 
-        //addObject(words4, 650, 400);
-        //addObject(words5, 950, 400);
+        addObject(words4, 650, 400);
+        addObject(words5, 950, 400);
         
         
     }
     
     //variable to change the words in each gamemode 
-    int x = 0; 
+    public static int x = 0; 
     public void act()
     {
         
@@ -71,7 +71,7 @@ public class ChoosingGamemodes extends World
     }
     
     
-    public int numberWords()
+    public static int numberWords()
     {
         return x;
     }
