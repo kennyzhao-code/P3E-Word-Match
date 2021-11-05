@@ -3,6 +3,10 @@ import java.util.HashMap;
 import java.util.*;
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/*
+ * Game world class for 3 words 
+ */
+
 public class GameWorld extends World
 {
     //label for the game 
@@ -10,13 +14,15 @@ public class GameWorld extends World
     Label timerLabel;
     Label multiplier; 
     Label letterx; 
+    Label timeLeft;
+    Label scoreLeft;
     
     
     //score counter 
     public int score = 0; 
     
     //mutiplier 
-    public int mul = 0; 
+    public int mul = 1; 
     
     //Hashmap to map the image to the right letter 
     HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
@@ -79,17 +85,30 @@ public class GameWorld extends World
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
         timerLabel = new Label(15, 80); 
-        multiplier = new Label(0,60); 
+        multiplier = new Label(1,60); 
         letterx = new Label(" Multiplier: x", 50); 
+        timeLeft = new Label("Time Left: ", 80);
+        scoreLeft = new Label("Score:", 80); 
+        
         addObject(letterx, 650, 500);
         addObject(multiplier, 800, 500); 
-        addObject(scoreLabel,50,50); 
+        addObject(scoreLabel,260,50); 
         addObject(timerLabel,1200, 50);
+        addObject(timeLeft, 975, 50);
+        addObject(scoreLeft,125, 50 ); 
     }
     
+    //method to increase multiplier 
     public void increaseMultiplier()
     {
         mul++; 
+        multiplier.setValue(mul); 
+    }
+    
+    //method to reset multiplier 
+    public void resetMultiplier()
+    {
+        mul = 1; 
         multiplier.setValue(mul); 
     }
     
@@ -206,6 +225,7 @@ public class GameWorld extends World
                     (position.get(i)).setLocation(posi.dequeue(), 300);                     
                 }
                 position.clear(); 
+                resetMultiplier(); 
             }
             
         }
