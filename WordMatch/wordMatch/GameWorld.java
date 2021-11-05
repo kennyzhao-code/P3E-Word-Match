@@ -105,6 +105,12 @@ public class GameWorld extends World
         multiplier.setValue(mul); 
     }
     
+    //returns what the multiplier is (used for the increaseScore method)
+    public int curMul()
+    {
+        return mul; 
+    }
+    
     //method to reset multiplier 
     public void resetMultiplier()
     {
@@ -115,7 +121,9 @@ public class GameWorld extends World
     //method to increase the score 
     public void increaseScore()
     {
-        score++;
+        int curMultiplier = curMul();
+        int baseScore = 1; 
+        score = score + (baseScore * curMultiplier); 
         scoreLabel.setValue(score); 
     }
     
