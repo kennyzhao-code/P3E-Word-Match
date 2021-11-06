@@ -23,7 +23,7 @@ public class InstructionWorld extends World
         background.setColor(Color.BLACK);
         background.drawString("Instructions", 230, 170);
         background.setFont(textFont); 
-        background.drawString("1. Choose your difficulty and you will a series of letters", 230, 250);
+        background.drawString("1. Choose your difficulty and you will get a series of 11 letters", 230, 250);
         background.drawString("2. These letters are anagrams (can make up words) ", 230, 300);
         background.drawString("3. Try to make all the possible word combinations", 230, 350);
         background.drawString("4. Try to beat the highest difficulty", 230, 400);
