@@ -253,41 +253,114 @@ public class GameWorld extends World
         move(10,1,2,3,4,5,6,7,8,9,0); 
         
         //checker for words + this is the only part that isnt working as  need to make it if word size == into 4 and 5  
-        if(word.size() == 3)
+        if(ChoosingGamemodes.numberWords() == 3)
         {
-            char[] compare = new char[3]; 
-            for(int i = 0; i < 3 ; i++ )
+            if(word.size() == 3)
             {
-                compare[i] = word.dequeue(); 
-            }
-            
-            if(valid.contains((String.valueOf(compare))))
+                char[] compare = new char[3]; 
+                for(int i = 0; i < 3 ; i++ )
                 {
+                    compare[i] = word.dequeue(); 
+                }
+                
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                            
+                        increaseScore(); 
+                        for(int i = 0; i < 3; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in);   
+                        increaseMultiplier(); 
                         
-                    increaseScore(); 
+                    }
+                
+                else{
                     for(int i = 0; i < 3; i++)
                     {
                         (position.get(i)).setLocation(posi.dequeue(), 500);                     
                     }
                     position.clear(); 
-                    int in = valid.indexOf((String.valueOf(compare))); 
-                    valid.remove(in);   
-                    increaseMultiplier(); 
-                    
+                    resetMultiplier(); 
                 }
-            
-            else{
-                for(int i = 0; i < 3; i++)
-                {
-                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
-                }
-                position.clear(); 
-                resetMultiplier(); 
+                
             }
-            
         }
-        
-    
+        if(ChoosingGamemodes.numberWords() == 4)
+        {
+            if(word.size() == 4)
+            {
+                char[] compare = new char[4]; 
+                for(int i = 0; i < 4 ; i++ )
+                {
+                    compare[i] = word.dequeue(); 
+                }
+                
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                            
+                        increaseScore(); 
+                        for(int i = 0; i < 4; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in);   
+                        increaseMultiplier(); 
+                        
+                    }
+                
+                else{
+                    for(int i = 0; i < 4; i++)
+                    {
+                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                    }
+                    position.clear(); 
+                    resetMultiplier(); 
+                }
+                
+            }
+        }
+        if(ChoosingGamemodes.numberWords() == 5)
+        {
+            if(word.size() == 5)
+            {
+                char[] compare = new char[5]; 
+                for(int i = 0; i < 5 ; i++ )
+                {
+                    compare[i] = word.dequeue(); 
+                }
+                
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                            
+                        increaseScore(); 
+                        for(int i = 0; i < 5; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in);   
+                        increaseMultiplier(); 
+                        
+                    }
+                
+                else{
+                    for(int i = 0; i < 5; i++)
+                    {
+                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                    }
+                    position.clear(); 
+                    resetMultiplier(); 
+                }
+                
+            }
+        }
     
     }
 
