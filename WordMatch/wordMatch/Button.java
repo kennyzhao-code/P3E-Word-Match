@@ -1,8 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+//THIS IS NOT OUR CLASS, THIS IS FROM ICS3U1 LAST YEAR MR COHEN CLASS. ALL CREDIT GOES TO HIM. ONLY PART CHANGED WAS THE COLOR AND FONT  
+
 /**
- * 
- * 
  * @author Mr.Cohen 
  * @version SPRING SEMESTER 2021
  */
@@ -43,8 +43,7 @@ public class Button extends Actor
            touching = true;
         }
         else {
-   
-            touching = false;
+           touching = false;
         }
     }    
     

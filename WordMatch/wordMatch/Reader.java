@@ -1,38 +1,45 @@
 import java.net.*;
 import java.io.*;
 import java.util.ArrayList; 
+/**
+ * @Ethan Woo and Kenny Zhao
+ * @Fall 2021
+ */
 public class Reader  
 {
     BufferedReader in;
-    static String urlName = "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt"; 
-    public static ArrayList<String> words = new ArrayList<String>();  
-    public Reader()
+    static String urlName = "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt"; //create URL object
+    public static ArrayList<String> words = new ArrayList<String>();  //declare objects
+    public Reader() //no constructor as we treated Reader as a holder of static methods
     {      
         
     }
-    public static void readInto() throws Exception {
+    public static void readInto() throws Exception 
+    {
         URL url = new URL(urlName);
-        BufferedReader in = new BufferedReader(
-        new InputStreamReader(url.openStream()));
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream())); //read the URL
         String word;
         while ((word = in.readLine()) != null)
         {
-            words.add(word);
+            words.add(word); //put into the arrayList
         }
-        in.close(); 
+        in.close(); //close the reader
     }
-    public static ArrayList<String> readNum(int x)
+    public static ArrayList<String> readNum(int x) //find the words with the right amount of letters
     {
         ArrayList<String> arr = new ArrayList<String>(); 
-        for(String inputLine: words)
+        for(String inputLine: words) //for each string in the array of all words
         {
-            if(inputLine.length() == x)
+            if(inputLine.length() == x) //if they are equal to the amount of words
             {
-                arr.add(inputLine); 
+                arr.add(inputLine); //add it to the new arraylist
             }
         }
         return arr; 
     }
+    
+    //These next three methods (readThree, readFour, readFive) are supposed to find which words are appropriate the random new characters
+    //They go through the readNum() arrayList, and find if that word has the right character. IF it does add it to the arrayList and after return it.
     public static ArrayList<String> readThree(ArrayList<String> array, char a, char b, char c, char d, char e, char f, char g, char h, char i, char j, char k)
     {
         ArrayList<String> arr = new ArrayList<String>(); 

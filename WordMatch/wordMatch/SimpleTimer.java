@@ -43,7 +43,7 @@ public class SimpleTimer
      * A second mark() call will reset the mark, and millisElapsed()
      * will start increasing from zero again.
      */
-    public void startStopWatch()
+    public void startStopWatch() //we switched the names
     {
         lastMark = System.currentTimeMillis();
     }
@@ -54,23 +54,10 @@ public class SimpleTimer
      * act() cycle, so if you call it many times during the same Greenfoot frame,
      * you may well get different answers.
      */
-    public int stopWatch()
+    public int stopWatch() //we switched the names
     {
         return (int) (System.currentTimeMillis() - lastMark);
     }
     
-    public void timer(int x)
-    {
-        secondsElapsed = 0; 
-        for(int i = x; i > 0; i--)
-        {
-            startStopWatch(); 
-            if(stopWatch() == 1)
-            {
-                startStopWatch();
-                secondsElapsed = i; 
-            } 
-        }
-    }
 
 }

@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap; 
 import java.util.*;
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/*
- * Game world class for 3 words 
+/**
+ * @Ethan Woo and Kenny Zhao
+ * @Fall 2021
  */
+
+//This is the main world
 
 public class GameWorld extends World
 {
@@ -16,24 +18,22 @@ public class GameWorld extends World
     Label letterx; 
     Label timeLeft;
     Label scoreLeft;
-    
-    //High Score counter
-    
+    //Create new userInfo to store High Score
     public static UserInfo myInfo; 
-    
     //score counter 
     public static int score = 0; 
-    
     //mutiplier 
     public int mul = 1; 
-    
     //Hashmap to map the image to the right letter 
     HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
     //Queue to check if the word exist 
     Queue<Character> word = new Queue<Character>(); 
     //arraylist to add the objects to the screen 
     ArrayList<Letters> let = new ArrayList<Letters>();
-    
+    //GreenfootSounds for the sound effects
+    GreenfootSound right;
+    GreenfootSound wrong; 
+    GreenfootSound pop; 
     //Hashmap to store the positions of each letter 
     HashMap<Letters, Integer> pos = new HashMap<Letters, Integer>(); 
     //Queue to put store and return back the positions of each integer 
@@ -48,8 +48,7 @@ public class GameWorld extends World
     ArrayList<String> fiveWords = new ArrayList<String>();
     //Arraylist that adds the valid words to check if a user gets it right
     ArrayList<String> valid;
-    
-    //timer for the game 
+    //variables for timer for the game 
     public int time = 15;
     SimpleTimer timer = new SimpleTimer(); 
     int counter = 0; 
@@ -64,7 +63,7 @@ public class GameWorld extends World
         //create new arrayList based off difficulty
         try 
         {
-            Reader.readInto();
+            Reader.readInto(); 
         }
         catch (Exception e)
         {
@@ -72,10 +71,10 @@ public class GameWorld extends World
         }
         threeWords = Reader.readNum(3); 
         fourWords = Reader.readNum(4);
-        fiveWords = Reader.readNum(5);
+        fiveWords = Reader.readNum(5); //create the possible arrays for each difficulty
         int r = 370; 
         int p = 370; 
-        char[] ch = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
+        char[] ch = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}; //array of the alphabet
         char firstChar = ch[Greenfoot.getRandomNumber(25)];
         char secondChar = ch[Greenfoot.getRandomNumber(25)];
         char thirdChar = ch[Greenfoot.getRandomNumber(25)];
@@ -86,10 +85,12 @@ public class GameWorld extends World
         char eighthChar = ch[Greenfoot.getRandomNumber(25)];
         char ninthChar = ch[Greenfoot.getRandomNumber(25)];
         char tenthChar = ch[Greenfoot.getRandomNumber(25)];
-        char eleventhChar = ch[Greenfoot.getRandomNumber(25)];
+        char eleventhChar = ch[Greenfoot.getRandomNumber(25)]; 
+        //get random letters to randomize game and make it fun
         char[] realChars = {firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar};
+        //array of random/actual characters that are being used in the game
         
-        //adding in the valid words into the array 
+        //adding in the valid words into the array called valid. It calls the reader method of readThree, readFour or readFive  
         if(ChoosingGamemodes.numberWords() == 3)
         {
             valid = Reader.readThree(threeWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
@@ -129,7 +130,10 @@ public class GameWorld extends World
             p = p + 55; 
         }
         
-         
+        //creating the sound effects
+        right = new GreenfootSound("sounds/correct.mp3"); 
+        wrong = new GreenfootSound("sounds/wrong.mp3");  
+        pop = new GreenfootSound("sounds/pop.mp3"); 
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
@@ -139,6 +143,7 @@ public class GameWorld extends World
         timeLeft = new Label("Time Left: ", 80);
         scoreLeft = new Label("Score:", 80); 
         
+        //show the labels and scores
         addObject(letterx, 650, 600);
         addObject(multiplier, 800, 600); 
         addObject(scoreLabel,260,50); 
@@ -194,6 +199,7 @@ public class GameWorld extends World
             
             GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
             image.drawImage(image, 500,500); 
+            Greenfoot.playSound("pop.mp3"); 
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(a))); 
@@ -204,7 +210,7 @@ public class GameWorld extends World
 
             if((let.get(b)).getX() != x && (let.get(c)).getX() != x && (let.get(d)).getX() != x && (let.get(e)).getX() != x && (let.get(f)).getX() != x && (let.get(g)).getX() != x && (let.get(h)).getX() != x && (let.get(i)).getX() != x && let.get((j)).getX() != x && let.get((k)).getX() != x)
             {
-                let.get(a).setLocation(x, z); 
+                let.get(a).setLocation(x, z); //set the locations
             }
             
             else if((let.get(b)).getX() != y && (let.get(c)).getX() != y && (let.get(d)).getX() != y && (let.get(e)).getX() != y && (let.get(f)).getX() != y && (let.get(g)).getX() != y && (let.get(h)).getX() != y && (let.get(i)).getX() != y && let.get((j)).getX() != y && let.get((k)).getX() != y)
@@ -220,6 +226,7 @@ public class GameWorld extends World
         }
     }
     
+    //return the score for other methods. 
     public int getScore()
     {
         return score; 
@@ -273,7 +280,8 @@ public class GameWorld extends World
                 
                 if(valid.contains((String.valueOf(compare))))
                     {
-                            
+                        right.setVolume(30); 
+                        right.play(); 
                         increaseScore(); 
                         for(int i = 0; i < 3; i++)
                         {
@@ -287,6 +295,8 @@ public class GameWorld extends World
                     }
                 
                 else{
+                    wrong.setVolume(20); 
+                    wrong.play(); 
                     for(int i = 0; i < 3; i++)
                     {
                         (position.get(i)).setLocation(posi.dequeue(), 500);                     
@@ -369,12 +379,12 @@ public class GameWorld extends World
                 
             }
         }
-        if (UserInfo.isStorageAvailable())
+        if (UserInfo.isStorageAvailable()) //this is for high score. 
         {
-            myInfo = UserInfo.getMyInfo();
+            myInfo = UserInfo.getMyInfo(); //get the server info
             if (myInfo != null)
             {
-                if (score > myInfo.getScore())
+                if (score > myInfo.getScore()) //if the current score is greater than high score, then store the current score as the new high score. 
                 {
                     myInfo.setScore(score);
                     myInfo.store();
