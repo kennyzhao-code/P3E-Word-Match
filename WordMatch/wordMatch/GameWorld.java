@@ -17,9 +17,12 @@ public class GameWorld extends World
     Label timeLeft;
     Label scoreLeft;
     
+    //High Score counter
+    
+    public static UserInfo myInfo; 
     
     //score counter 
-    public int score = 0; 
+    public static int score = 0; 
     
     //mutiplier 
     public int mul = 1; 
@@ -217,6 +220,11 @@ public class GameWorld extends World
         }
     }
     
+    public int getScore()
+    {
+        return score; 
+    }
+    
     //actual game 
     public void act()
     {
@@ -361,7 +369,18 @@ public class GameWorld extends World
                 
             }
         }
-    
+        if (UserInfo.isStorageAvailable())
+        {
+            myInfo = UserInfo.getMyInfo();
+            if (myInfo != null)
+            {
+                if (score > myInfo.getScore())
+                {
+                    myInfo.setScore(score);
+                    myInfo.store();
+                }
+            }
+        }
     }
 
 }

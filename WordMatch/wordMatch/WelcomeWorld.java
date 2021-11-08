@@ -31,6 +31,7 @@ public class WelcomeWorld extends World
         
         addObject(play, 400, 425); 
         addObject(instructions, 880, 425); 
+         
 
     }
     public void act()

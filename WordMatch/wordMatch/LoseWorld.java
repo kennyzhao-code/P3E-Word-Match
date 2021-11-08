@@ -33,6 +33,12 @@ public class LoseWorld extends World
         addObject(playAgain, 900, 520);
         addObject(quit, 400, 520); 
         setBackground(background); 
+        String highText = "High score: "+ GameWorld.myInfo.getScore();
+        String scoreText = "Your score: "+ GameWorld.score;
+        GreenfootImage score = new GreenfootImage(scoreText, 50, Color.BLACK, Color.WHITE);
+        GreenfootImage highScore = new GreenfootImage(highText, 50, Color.BLACK, Color.WHITE);
+        background.drawImage(highScore, 525, 350);
+        background.drawImage(score, 525, 300);
     }
      public void act()
     {
