@@ -66,6 +66,12 @@ public class GameWorld extends World
     GreenfootSound right;
     GreenfootSound wrong; 
     GreenfootSound pop; 
+
+    //images for correct and wrong
+    GreenfootImage checkMark = new GreenfootImage("check mark.png");
+    GreenfootImage redx = new GreenfootImage("red x.png");
+    //bg of the map
+    GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
     
     
     //variables for timer for the game 
@@ -77,10 +83,9 @@ public class GameWorld extends World
     {    
         super(1280, 720, 1);
         
-        //bg of the map
-        GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
+        //setting bg picture 
         setBackground(background); 
-        
+    
         //create new arrayList based off difficulty
         try 
         {
@@ -321,58 +326,89 @@ public class GameWorld extends World
         move(10,1,2,3,4,5,6,7,8,9,0); 
         
         //checker for words + this is the only part that isnt working as  need to make it if word size == into 4 and 5  
-            if(word.size() == 3)
+        if(word.size() == 3)
+        {
+            //loop to add the letters the user chose into an array
+            char[] compare = new char[3]; 
+            for(int i = 0; i < 3 ; i++ )
             {
-                //loop to add the letters the user chose into an array
-                char[] compare = new char[3]; 
-                for(int i = 0; i < 3 ; i++ )
-                {
-                    compare[i] = word.dequeue(); 
-                }
-                
-                //conver the array into a string and compare it to the valid arraylist and the arraylist of already checked words 
-                if(valid.contains((String.valueOf(compare))) && !validWords.contains((String.valueOf(compare))))
-                    {
-                        //sounds effects 
-                        right.setVolume(30); 
-                        right.play(); 
-                        //calls increase score method 
-                        increaseScore(); 
-                        //adds the valid word to an arraylist so that it will not count again if the user puts it
-                        //add the valid word onto the screen so the user knows 
-                        validWords.add(String.valueOf(compare)); 
-                        addObject(new Label(String.valueOf(compare), 45), correctWordXPosition, correctWordYPosition); 
-                        correctWordYPosition = correctWordYPosition + 40;
-                        
-                        //loop to return the words back to its original position, clear the position arraylist for next word 
-                        for(int i = 0; i < 3; i++)
-                        {
-                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
-                        }
-                        position.clear(); 
-                        //checker
-                        int in = valid.indexOf((String.valueOf(compare))); 
-                        valid.remove(in);   
-                        //increase the multiplier 
-                        increaseMultiplier(); 
-                        
-                    }
-                
-                else{
-                    //if wrong, play sound effect 
-                    wrong.setVolume(20); 
-                    wrong.play(); 
-                    //loop to return the words back to its original position, clear the position arraylist for next word 
-                    for(int i = 0; i < 3; i++)
-                    {
-                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
-                    }
-                    position.clear(); 
-                    //reset the multiplier 
-                    resetMultiplier(); 
-                }
-                
+                compare[i] = word.dequeue(); 
             }
+                
+            //conver the array into a string and compare it to the valid arraylist and the arraylist of already checked words 
+            if(valid.contains((String.valueOf(compare))) && !validWords.contains((String.valueOf(compare))))
+            {
+                //sounds effects 
+                right.setVolume(30); 
+                right.play(); 
+                //calls increase score method 
+                increaseScore(); 
+                //adds the valid word to an arraylist so that it will not count again if the user puts it
+                //add the valid word onto the screen so the user knows 
+                validWords.add(String.valueOf(compare)); 
+                addObject(new Label(String.valueOf(compare), 45), correctWordXPosition, correctWordYPosition); 
+                correctWordYPosition = correctWordYPosition + 40;
+               
+                //add check mark
+                //checkMark = new GreenfootImage("check mark.png");
+                redx.clear();
+                checkMark = new GreenfootImage("check mark.png");
+                checkMark.scale(150,150);
+                background.drawImage(checkMark, 400,300); 
+                        
+                //loop to return the words back to its original position, clear the position arraylist for next word 
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                }
+                position.clear(); 
+                //checker
+                int in = valid.indexOf((String.valueOf(compare))); 
+                valid.remove(in);   
+                //increase the multiplier 
+                increaseMultiplier(); 
+                        
+            }
+                
+            else
+            {
+                //if wrong, play sound effect 
+                wrong.setVolume(20); 
+                wrong.play(); 
+                
+                //add red x 
+                //redx = new GreenfootImage("red x.png");
+                checkMark.clear(); 
+                redx = new GreenfootImage("red x.png");
+                redx.scale(120,120);
+                background.drawImage(redx, 400,300); 
+                
+                //loop to return the words back to its original position, clear the position arraylist for next word 
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                }
+                position.clear(); 
+                //reset the multiplier 
+                resetMultiplier(); 
+            }
+                
+        }
+        
+        if (UserInfo.isStorageAvailable()) //this is for high score. 
+        {
+            myInfo = UserInfo.getMyInfo(); //get the server info
+            if (myInfo != null)
+            {
+                if (score > myInfo.getScore()) //if the current score is greater than high score, then store the current score as the new high score. 
+                {
+                    myInfo.setScore(score);
+                    myInfo.store();
+                }
+            }
+        }
+        
+        /*
         if(ChoosingGamemodes.numberWords() == 4)
         {
             if(word.size() == 4)
@@ -445,18 +481,9 @@ public class GameWorld extends World
                 
             }
         }
-        if (UserInfo.isStorageAvailable()) //this is for high score. 
-        {
-            myInfo = UserInfo.getMyInfo(); //get the server info
-            if (myInfo != null)
-            {
-                if (score > myInfo.getScore()) //if the current score is greater than high score, then store the current score as the new high score. 
-                {
-                    myInfo.setScore(score);
-                    myInfo.store();
-                }
-            }
-        }
+        */
+       
+       
     }
 
 }
