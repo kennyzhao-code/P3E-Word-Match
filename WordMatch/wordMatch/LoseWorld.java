@@ -31,11 +31,11 @@ public class LoseWorld extends World
         addObject(quit, 400, 520); 
         setBackground(background); //set background
         String highText = "High score: "+ GameWorld.myInfo.getScore(); //myInfo from userinfo greenfoot API
-        String scoreText = "Your score: "+ GameWorld.score; //make high score and current score text
-        GreenfootImage score = new GreenfootImage(scoreText, 50, Color.BLACK, Color.WHITE);
+        //String scoreText = "Your score: "+ GameWorld.score; //make high score and current score text
+        //GreenfootImage score = new GreenfootImage(scoreText, 50, Color.BLACK, Color.WHITE);
         GreenfootImage highScore = new GreenfootImage(highText, 50, Color.BLACK, Color.WHITE);
         background.drawImage(highScore, 525, 350);
-        background.drawImage(score, 525, 300); //draw the high score and current score
+        //background.drawImage(score, 525, 300); //draw the high score and current score
     }
      public void act()
     {
