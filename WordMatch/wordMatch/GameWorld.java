@@ -2,10 +2,12 @@ import java.util.ArrayList;
 import java.util.HashMap; 
 import java.util.*;
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
-/*
- * Game world class for 3 words 
+/**
+ * @Ethan Woo and Kenny Zhao
+ * @Fall 2021
  */
+
+//This is the main world
 
 public class GameWorld extends World
 {
@@ -16,32 +18,63 @@ public class GameWorld extends World
     Label letterx; 
     Label timeLeft;
     Label scoreLeft;
+    Label wordsDone; 
     
     
+    //variables for handling score 
+    //Create new userInfo to store High Score
+    public static UserInfo myInfo; 
     //score counter 
-    public int score = 0; 
-    
+    public int score = 0;
     //mutiplier 
     public int mul = 1; 
     
-    //Hashmap to map the image to the right letter 
-    HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
-    //Queue to check if the word exist 
-    Queue<Character> word = new Queue<Character>(); 
+     
     //arraylist to add the objects to the screen 
     ArrayList<Letters> let = new ArrayList<Letters>();
+
     
+    //Data strucutres for changing location of letters 
     //Hashmap to store the positions of each letter 
     HashMap<Letters, Integer> pos = new HashMap<Letters, Integer>(); 
     //Queue to put store and return back the positions of each integer 
     Queue<Integer> posi = new Queue<Integer>();  
+ 
+    
+    //Arraylists for the checker and reader 
     //Arraylist to store which letters where selected for returning
     ArrayList<Letters> position = new ArrayList<Letters>();
-    
+    //Arraylist for words that fit the 3 letters of words
+    ArrayList<String> threeWords = new ArrayList<String>();
+    //Arraylist for words that fit the 4 letters of words
+    ArrayList<String> fourWords = new ArrayList<String>();
+    //Arraylist for words that fit the 5 letters of words
+    ArrayList<String> fiveWords = new ArrayList<String>();
     //Arraylist that adds the valid words to check if a user gets it right
-    List<String> valid;
+    ArrayList<String> valid;
+    //Queue to check if the word exist 
+    Queue<Character> word = new Queue<Character>(); 
+    //Hashmap to map the image to the right letter 
+    HashMap<Letters, Character> wordStorage = new HashMap<Letters, Character>(); 
+    //ArrayList to add in already valid words
+    ArrayList<String> validWords = new ArrayList<String>(); 
+    //variable to control y value of the word
+    int correctWordYPosition = 200; 
+    int correctWordXPosition = 1100;
+     
+    //GreenfootSounds for the sound effects
+    GreenfootSound right;
+    GreenfootSound wrong; 
+    GreenfootSound pop; 
+
+    //images for correct and wrong
+    GreenfootImage checkMark = new GreenfootImage("check mark.png");
+    GreenfootImage redx = new GreenfootImage("red x.png");
+    //bg of the map
+    GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
     
-    //timer for the game 
+    
+    //variables for timer for the game 
     public int time = 15;
     SimpleTimer timer = new SimpleTimer(); 
     int counter = 0; 
@@ -50,42 +83,106 @@ public class GameWorld extends World
     {    
         super(1280, 720, 1);
         
-        //bg of the map
-        GreenfootImage background = new GreenfootImage("bg1.jpg"); 
+        //setting bg picture 
         setBackground(background); 
-        
-        
-        //adding the objects to the arraylist 
-        int r = 370; 
-        int p = 370; 
-        char[] ch = {'a', 'p', 't', 'r', 'e', 'm', 's', 'b', 'o', 'n', 'w'};
-        for(int i = 0; i < 11; i++)
+    
+        //create new arrayList based off difficulty
+        try 
         {
-            let.add(new Letters(ch[i]));
+            Reader.readInto(); 
         }
-        // printing the objetcs onto the screen 
+        catch (Exception e)
+        {
+            
+        }
+        threeWords = Reader.readNum(3); 
+        fourWords = Reader.readNum(4);
+        fiveWords = Reader.readNum(5); //create the possible arrays for each difficulty
+       
+        //get random letters to randomize game and make it fun
+        //data structures for the randomizer 
+        Character[] chCon = {'b', 'c', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'v', 'w', 'x', 'y', 'z'}; 
+        Character[] chVow = {'a', 'e', 'i', 'o', 'u'};
+        ArrayList<Character> consonant = new ArrayList<Character>(Arrays.asList(chCon)); 
+        ArrayList<Character> vowel = new ArrayList<Character>(Arrays.asList(chVow)); 
+        
+        //Array to store the letters that will be present in the game
+        //loops to add in the randomly chosen character, making sure there are 3 different vowels 
+        ArrayList<Character> letForRan = new ArrayList<Character>(); 
+        int numberOfLettersVOW = 5; 
+        int numberOfLettersCON = 20; 
+        for(int i = 0; i < 3; i++)
+        {
+            letForRan.add(vowel.remove(Greenfoot.getRandomNumber(numberOfLettersVOW)));
+            numberOfLettersVOW--; 
+        }
+        
+        for(int i = 0; i < 8; i++)
+        {
+            letForRan.add(consonant.remove(Greenfoot.getRandomNumber(numberOfLettersCON)));
+            numberOfLettersCON--; 
+        }
+        
+        //randomizing the order of letters in the array 
+        char firstChar = letForRan.remove(Greenfoot.getRandomNumber(10));
+        char secondChar = letForRan.remove(Greenfoot.getRandomNumber(9));
+        char thirdChar = letForRan.remove(Greenfoot.getRandomNumber(8));
+        char fourthChar = letForRan.remove(Greenfoot.getRandomNumber(7));
+        char fifthChar = letForRan.remove(Greenfoot.getRandomNumber(6));
+        char sixthChar = letForRan.remove(Greenfoot.getRandomNumber(5));
+        char seventhChar = letForRan.remove(Greenfoot.getRandomNumber(4));
+        char eighthChar = letForRan.remove(Greenfoot.getRandomNumber(3));
+        char ninthChar = letForRan.remove(Greenfoot.getRandomNumber(2));
+        char tenthChar = letForRan.remove(Greenfoot.getRandomNumber(1));
+        char eleventhChar = letForRan.remove(0);
+        //putting all new letters in a new array for them to be added 
+        char[] realChars = {firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar};
+        
+        //adding the objects to the arraylist
         for(int i = 0; i < 11; i++)
         {
-            this.addObject(let.get(i), r , 313); 
+            let.add(new Letters(realChars[i])); 
+        }
+        
+        // printing the objetcs onto the screen 
+        int r = 170; 
+        int p = 170; 
+        for(int i = 0; i < 11; i++)
+        {
+            this.addObject(let.get(i), r , 500); 
             r = r + 55; 
         }
         
-        //storing objects into the hashmap
+        //storing objects into the hashmap, hashamp for returning the characters back to their original position 
         for(int i = 0; i < 11; i++)
         {
-            wordStorage.put(let.get(i), ch[i]); 
+            wordStorage.put(let.get(i), realChars[i]); 
         }
         
         //hashamap to store all the positions of every single letter 
-        for(int i = 0; i < 11; i++ ) 
+        for(int i = 0; i < 11; i++) 
         {
             pos.put(let.get(i), p);
             p = p + 55; 
         }
         
-        //adding in the valid words into the array 
-        String[] array = {"apt", "pat", "tap", "are", "ear", "era", "arm", "mar", "ram", "art","rat","tar","asp","pas","sap","spa","ate","eat","eta","tea","bat","stab","tab","now","own","won","opt","pot","top"};
-        valid = new ArrayList(Arrays.asList(array));
+        //adding in the valid words into the array called valid. It calls the reader method of readThree, readFour or readFive  
+      
+        valid = Reader.readThree(threeWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        
+        if(ChoosingGamemodes.numberWords() == 4)
+        {
+            valid = Reader.readFour(fourWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        }
+        if(ChoosingGamemodes.numberWords() == 5)
+        {
+            valid = Reader.readFive(fiveWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        }
+        
+        //creating the sound effects
+        right = new GreenfootSound("sounds/correct.mp3"); 
+        wrong = new GreenfootSound("sounds/wrong.mp3");  
+        pop = new GreenfootSound("sounds/pop.mp3"); 
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
@@ -94,13 +191,19 @@ public class GameWorld extends World
         letterx = new Label(" Multiplier: x", 50); 
         timeLeft = new Label("Time Left: ", 80);
         scoreLeft = new Label("Score:", 80); 
+        wordsDone = new Label("Correct Words", 50); 
         
-        addObject(letterx, 650, 500);
-        addObject(multiplier, 800, 500); 
+        //show the labels and scores
+        addObject(letterx, 150, 675);
+        addObject(multiplier, 300, 675); 
         addObject(scoreLabel,260,50); 
         addObject(timerLabel,1200, 50);
-        addObject(timeLeft, 975, 50);
+        addObject(timeLeft, 1000, 50);
         addObject(scoreLeft,125, 50 ); 
+        addObject(wordsDone, 1100, 150); 
+        
+        
+        
     }
     
     //method to increase multiplier 
@@ -138,18 +241,25 @@ public class GameWorld extends World
         return score; 
     }
     
+    //return the score for other methods. 
+    public int getScore()
+    {
+        return score; 
+    }
+    
     //method that moves the letters 
     public void move(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k) 
     {
          if(Greenfoot.mouseClicked(let.get(a)))
         {
             //variables for changing the location 
-            int x =  253; 
+            int x =  156; 
             int y = x + 55; 
-            int z = 505; 
+            int z = 300; 
             
-            GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
-            image.drawImage(image, 500,500); 
+            //GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
+            //image.drawImage(image, 500,500); 
+            Greenfoot.playSound("pop.mp3"); 
             
             //adding word to queue 
             word.enqueue(wordStorage.get(let.get(a))); 
@@ -157,19 +267,23 @@ public class GameWorld extends World
             posi.enqueue(pos.get(let.get(a))); 
             //adding letter to array to track to return 
             position.add(let.get(a)); 
-
+            
+            //checks if the first position is clear 
             if((let.get(b)).getX() != x && (let.get(c)).getX() != x && (let.get(d)).getX() != x && (let.get(e)).getX() != x && (let.get(f)).getX() != x && (let.get(g)).getX() != x && (let.get(h)).getX() != x && (let.get(i)).getX() != x && let.get((j)).getX() != x && let.get((k)).getX() != x)
             {
+                //set the location to the first position 
                 let.get(a).setLocation(x, z); 
             }
-            
+            //checks if the second position is clear 
             else if((let.get(b)).getX() != y && (let.get(c)).getX() != y && (let.get(d)).getX() != y && (let.get(e)).getX() != y && (let.get(f)).getX() != y && (let.get(g)).getX() != y && (let.get(h)).getX() != y && (let.get(i)).getX() != y && let.get((j)).getX() != y && let.get((k)).getX() != y)
             {
+                //set the location to the second position 
                 let.get(a).setLocation(y,z);
             }
-            
+            //if both false, set letter to third position 
             else
             {
+                //set the location to the third position 
                 y = y + 50;
                 let.get(a).setLocation(x,z); 
             }
@@ -209,45 +323,167 @@ public class GameWorld extends World
         move(7,1,2,3,4,5,6,0,8,9,10);
         move(8,1,2,3,4,5,6,7,0,9,10);
         move(9,1,2,3,4,5,6,7,8,0,10);
-        move(10,1,2,3,4,5,6,7,8,9,0);
+        move(10,1,2,3,4,5,6,7,8,9,0); 
         
-        //checker for words  
+        //checker for words + this is the only part that isnt working as  need to make it if word size == into 4 and 5  
         if(word.size() == 3)
         {
+            //loop to add the letters the user chose into an array
             char[] compare = new char[3]; 
             for(int i = 0; i < 3 ; i++ )
             {
                 compare[i] = word.dequeue(); 
             }
-            
-            if(valid.contains((String.valueOf(compare))))
-                {
+                
+            //conver the array into a string and compare it to the valid arraylist and the arraylist of already checked words 
+            if(valid.contains((String.valueOf(compare))) && !validWords.contains((String.valueOf(compare))))
+            {
+                //sounds effects 
+                right.setVolume(30); 
+                right.play(); 
+                //calls increase score method 
+                increaseScore(); 
+                //adds the valid word to an arraylist so that it will not count again if the user puts it
+                //add the valid word onto the screen so the user knows 
+                validWords.add(String.valueOf(compare)); 
+                addObject(new Label(String.valueOf(compare), 45), correctWordXPosition, correctWordYPosition); 
+                correctWordYPosition = correctWordYPosition + 40;
+               
+                //add check mark
+                //checkMark = new GreenfootImage("check mark.png");
+                redx.clear();
+                checkMark = new GreenfootImage("check mark.png");
+                checkMark.scale(150,150);
+                background.drawImage(checkMark, 400,300); 
                         
-                    increaseScore(); 
-                    for(int i = 0; i < 3; i++)
-                    {
-                        (position.get(i)).setLocation(posi.dequeue(), 313);                     
-                    }
-                    position.clear(); 
-                    int in = valid.indexOf((String.valueOf(compare))); 
-                    valid.remove(in);   
-                    increaseMultiplier(); 
-                    
-                }
-            
-            else{
+                //loop to return the words back to its original position, clear the position arraylist for next word 
                 for(int i = 0; i < 3; i++)
                 {
-                    (position.get(i)).setLocation(posi.dequeue(), 313);                     
+                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
                 }
                 position.clear(); 
+                //checker
+                int in = valid.indexOf((String.valueOf(compare))); 
+                valid.remove(in);   
+                //increase the multiplier 
+                increaseMultiplier(); 
+                        
+            }
+                
+            else
+            {
+                //if wrong, play sound effect 
+                wrong.setVolume(20); 
+                wrong.play(); 
+                
+                //add red x 
+                //redx = new GreenfootImage("red x.png");
+                checkMark.clear(); 
+                redx = new GreenfootImage("red x.png");
+                redx.scale(120,120);
+                background.drawImage(redx, 400,300); 
+                
+                //loop to return the words back to its original position, clear the position arraylist for next word 
+                for(int i = 0; i < 3; i++)
+                {
+                    (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                }
+                position.clear(); 
+                //reset the multiplier 
                 resetMultiplier(); 
             }
-            
+                
         }
         
-    
-    
+        if (UserInfo.isStorageAvailable()) //this is for high score. 
+        {
+            myInfo = UserInfo.getMyInfo(); //get the server info
+            if (myInfo != null)
+            {
+                if (score > myInfo.getScore()) //if the current score is greater than high score, then store the current score as the new high score. 
+                {
+                    myInfo.setScore(score);
+                    myInfo.store();
+                }
+            }
+        }
+        
+        /*
+        if(ChoosingGamemodes.numberWords() == 4)
+        {
+            if(word.size() == 4)
+            {
+                char[] compare = new char[4]; 
+                for(int i = 0; i < 4 ; i++ )
+                {
+                    compare[i] = word.dequeue(); 
+                }
+                
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                            
+                        increaseScore(); 
+                        for(int i = 0; i < 4; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in);   
+                        increaseMultiplier(); 
+                        
+                    }
+                
+                else{
+                    for(int i = 0; i < 4; i++)
+                    {
+                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                    }
+                    position.clear(); 
+                    resetMultiplier(); 
+                }
+                
+            }
+        }
+        if(ChoosingGamemodes.numberWords() == 5)
+        {
+            if(word.size() == 5)
+            {
+                char[] compare = new char[5]; 
+                for(int i = 0; i < 5 ; i++ )
+                {
+                    compare[i] = word.dequeue(); 
+                }
+                
+                if(valid.contains((String.valueOf(compare))))
+                    {
+                            
+                        increaseScore(); 
+                        for(int i = 0; i < 5; i++)
+                        {
+                            (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                        }
+                        position.clear(); 
+                        int in = valid.indexOf((String.valueOf(compare))); 
+                        valid.remove(in);   
+                        increaseMultiplier(); 
+                        
+                    }
+                
+                else{
+                    for(int i = 0; i < 5; i++)
+                    {
+                        (position.get(i)).setLocation(posi.dequeue(), 500);                     
+                    }
+                    position.clear(); 
+                    resetMultiplier(); 
+                }
+                
+            }
+        }
+        */
+       
+       
     }
 
 }
