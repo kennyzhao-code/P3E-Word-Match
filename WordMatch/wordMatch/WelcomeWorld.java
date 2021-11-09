@@ -14,6 +14,7 @@ public class WelcomeWorld extends World
         super(1280, 720, 1);
         Font titleFont = new Font("Calibri", true, false, 40);
         GreenfootImage title = new GreenfootImage("cooltext396141752577605.png"); //the custom title
+        
         play = new Button("Play");
         instructions = new Button("Instructions"); 
         GreenfootImage background = new GreenfootImage("the-library-wallpaper-1280x720-wallpaper.jpg"); //the custom background
@@ -26,7 +27,7 @@ public class WelcomeWorld extends World
         
         addObject(play, 400, 425); 
         addObject(instructions, 880, 425); //add objects to the world
-         
+        
 
     }
     public void act()

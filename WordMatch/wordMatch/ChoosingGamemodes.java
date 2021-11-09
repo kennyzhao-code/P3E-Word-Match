@@ -18,6 +18,11 @@ public class ChoosingGamemodes extends World
         Font titleFont = new Font("Calibri", true, false, 40);
         GreenfootImage title = new GreenfootImage("cooltext396141752577605.png");
         
+        //custom titles
+        GreenfootImage easy = new GreenfootImage("easy.png"); 
+        GreenfootImage medium = new GreenfootImage("medium.png");
+        GreenfootImage hard = new GreenfootImage("hard.png"); //custom names
+        
         //Set background image and draw the title
         GreenfootImage background = new GreenfootImage("abstract_geometric_triangle_background-wallpaper-1280x720.jpg"); 
         background.setFont(titleFont);
@@ -35,7 +40,10 @@ public class ChoosingGamemodes extends World
         addObject(words4, 650, 400);
         addObject(words5, 950, 400);
         
-        
+        //draw the lables
+        background.drawImage(easy, 250, 450);
+        background.drawImage(medium, 525, 450);
+        background.drawImage(hard, 850, 450);
     }
     
     //variable to change the words in each gamemode 

@@ -67,16 +67,17 @@ public class GameWorld extends World
     GreenfootSound wrong; 
     GreenfootSound pop; 
 
-    //images for correct and wrong
-    GreenfootImage checkMark = new GreenfootImage("check mark.png");
-    GreenfootImage redx = new GreenfootImage("red x.png");
+    //the Check mark and X mark
+    x xmark; 
+    check checkMark; 
+    
     //bg of the map
     GreenfootImage background = new GreenfootImage("texture_wooden_wood_153268_1280x720.jpg"); 
     
     
     //variables for timer for the game 
     public int time = 15;
-    SimpleTimer timer = new SimpleTimer(); 
+    SimpleTimer timer = new SimpleTimer();  
     int counter = 0; 
     
     public GameWorld()
@@ -178,7 +179,9 @@ public class GameWorld extends World
         {
             valid = Reader.readFive(fiveWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
         }
-        
+        //check marks
+        xmark = new x();
+        checkMark = new check(); 
         //creating the sound effects
         right = new GreenfootSound("sounds/correct.mp3"); 
         wrong = new GreenfootSound("sounds/wrong.mp3");  
@@ -349,12 +352,6 @@ public class GameWorld extends World
                 addObject(new Label(String.valueOf(compare), 45), correctWordXPosition, correctWordYPosition); 
                 correctWordYPosition = correctWordYPosition + 40;
                
-                //add check mark
-                //checkMark = new GreenfootImage("check mark.png");
-                redx.clear();
-                checkMark = new GreenfootImage("check mark.png");
-                checkMark.scale(150,150);
-                background.drawImage(checkMark, 400,300); 
                         
                 //loop to return the words back to its original position, clear the position arraylist for next word 
                 for(int i = 0; i < 3; i++)
@@ -367,7 +364,11 @@ public class GameWorld extends World
                 valid.remove(in);   
                 //increase the multiplier 
                 increaseMultiplier(); 
-                        
+                
+                //add check mark
+                //checkMark = new GreenfootImage("check mark.png");
+                addObject(checkMark, 400,300);
+                checkMark = new check(); 
             }
                 
             else
@@ -375,14 +376,7 @@ public class GameWorld extends World
                 //if wrong, play sound effect 
                 wrong.setVolume(20); 
                 wrong.play(); 
-                
-                //add red x 
-                //redx = new GreenfootImage("red x.png");
-                checkMark.clear(); 
-                redx = new GreenfootImage("red x.png");
-                redx.scale(120,120);
-                background.drawImage(redx, 400,300); 
-                
+
                 //loop to return the words back to its original position, clear the position arraylist for next word 
                 for(int i = 0; i < 3; i++)
                 {
@@ -390,7 +384,13 @@ public class GameWorld extends World
                 }
                 position.clear(); 
                 //reset the multiplier 
-                resetMultiplier(); 
+                resetMultiplier();
+                
+                //add red x 
+                //redx = new GreenfootImage("red x.png");
+                addObject(xmark, 400,300);
+                xmark = new x(); 
+                
             }
                 
         }
