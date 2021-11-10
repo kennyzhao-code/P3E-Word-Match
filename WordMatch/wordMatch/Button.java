@@ -22,11 +22,13 @@ public class Button extends Actor
     
     // Set up a 18-pt, bold Courier New font for drawing text onto my Button
     private Font buttonFont = new Font("Calibri",  false,  true,  30);
+    private Font boldFont = new Font("Calibri",  true,  true,  31);
     private Color peach = new Color(248, 232, 212); 
+    private Color orange = new Color(255, 153, 51); 
 
     public Button (String text) {
         image = new GreenfootImage (220, 70);
-        touchingImage = new GreenfootImage (220, 50);
+        touchingImage = new GreenfootImage (220, 70);
         myText = text;
         int wordLength = myText.length();  
         int wordWidth = (int)(wordLength * buttonFont.getSize() * FONT_RATIO); 
@@ -45,6 +47,14 @@ public class Button extends Actor
         else {
            touching = false;
         }
+        if(Greenfoot.mouseMoved(this))
+        {
+            setImage(touchingImage); 
+        }
+        if(Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        {
+            setImage(image); 
+        }
     }    
     
     public boolean touchingCursor(){
@@ -59,10 +69,10 @@ public class Button extends Actor
         image.setFont (buttonFont);
         image.drawString (myText, drawX, drawY);
 
-        touchingImage.setColor(Color.GRAY);
+        touchingImage.setColor(orange);
         touchingImage.fill();
         touchingImage.setColor(Color.BLACK);
-        touchingImage.setFont (buttonFont);
+        touchingImage.setFont (boldFont);
         touchingImage.drawString (myText, drawX, drawY);
     }   
 }
