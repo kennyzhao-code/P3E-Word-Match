@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class WinWorld extends World
 {
-
+    String scoreText;
     Color beige = new Color(224, 171, 113); 
     Font titleFont = new Font("Calibri", true, false, 60);
     Font textFont = new Font("Calibri", false, false, 25);
@@ -26,12 +26,26 @@ public class WinWorld extends World
         background.setColor(Color.WHITE); 
         background.fillRect(201, 101, 879, 519);
         background.setColor(Color.BLACK); //white rectangle with black outline
-        background.drawString("You Win!", 525, 250);
+        background.drawString("Time's Up!", 525, 250);
         addObject(playAgain, 900, 520);
         addObject(quit, 400, 520); 
         setBackground(background); //set background
         String highText = "High score: "+ GameWorld.myInfo.getScore(); //myInfo from userinfo greenfoot API
-        String scoreText = "Your score: "+ GameWorld.score(); //make high score and current score text
+        if(ChoosingGamemodes.touchingThree)
+        {
+             scoreText = "Your score: "+ GameWorld.score(); //make high score and current score text
+             ChoosingGamemodes.touchingThree = false; 
+        }
+        if(ChoosingGamemodes.touchingFour)
+        {
+             scoreText = "Your score: "+ GameWorld4.score(); //make high score and current score text
+             ChoosingGamemodes.touchingFour = false; 
+        }  
+        if(ChoosingGamemodes.touchingFive)
+        {
+             scoreText = "Your score: "+ GameWorld5.score(); //make high score and current score text
+             ChoosingGamemodes.touchingFive = false; 
+        }
         GreenfootImage score = new GreenfootImage(scoreText, 50, Color.BLACK, Color.WHITE);
         GreenfootImage highScore = new GreenfootImage(highText, 50, Color.BLACK, Color.WHITE);
         background.drawImage(highScore, 525, 350);

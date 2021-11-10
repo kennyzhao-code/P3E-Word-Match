@@ -301,14 +301,9 @@ public class GameWorld4 extends World
             counter++; 
         } 
 
-        if(counter > time + 1 && score >= 1)
+        if(counter > time + 1)
         {
             Greenfoot.setWorld(new WinWorld()); 
-        }
-        
-        if(counter > time + 1 && score == 0)
-        {
-            Greenfoot.setWorld(new LoseWorld()); 
         }
         
         //methods for moving all 11 letters 

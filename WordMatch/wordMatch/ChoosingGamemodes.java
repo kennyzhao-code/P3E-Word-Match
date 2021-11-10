@@ -9,6 +9,9 @@ public class ChoosingGamemodes extends World
     Button words3; 
     Button words4; 
     Button words5; 
+    public static boolean touchingThree = false; 
+    public static boolean touchingFour = false; 
+    public static boolean touchingFive = false; 
     public ChoosingGamemodes() //constructor
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -51,19 +54,19 @@ public class ChoosingGamemodes extends World
         //actually letting player choose gameworld so if their cursor is on it, the game behaves differently
         if(words3.touchingCursor())
         {
-          
+            touchingThree = true; 
             Greenfoot.setWorld(new GameWorld());
         }
         
         if(words4.touchingCursor())
         {
-       
+            touchingFour = true; 
             Greenfoot.setWorld(new GameWorld4());
         }
         
         if(words5.touchingCursor())
         {
-        
+            touchingFive = true; 
             Greenfoot.setWorld(new GameWorld5());
         }
         

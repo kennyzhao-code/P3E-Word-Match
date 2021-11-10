@@ -291,15 +291,11 @@ public class GameWorld extends World
             counter++; 
         } 
 
-        if(counter > time + 1 && score >= 1)
+        if(counter > time + 1)
         {
             Greenfoot.setWorld(new WinWorld()); 
         }
-        
-        if(counter > time + 1 && score == 0)
-        {
-            Greenfoot.setWorld(new LoseWorld()); 
-        }
+       
         
         //methods for moving all 11 letters 
         move(0,1,2,3,4,5,6,7,8,9,10);
