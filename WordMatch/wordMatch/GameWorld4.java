@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 //This is the main world
 
-public class GameWorld extends World
+public class GameWorld4 extends World
 {
     //label for the game 
     Label scoreLabel;
@@ -72,7 +72,7 @@ public class GameWorld extends World
     check checkMark; 
     
     //bg of the map
-    GreenfootImage background = new GreenfootImage("bgfinal.png"); 
+    GreenfootImage background = new GreenfootImage("bgfinal1.png"); 
     
     
     //variables for timer for the game 
@@ -80,7 +80,7 @@ public class GameWorld extends World
     SimpleTimer timer = new SimpleTimer();  
     int counter = 0; 
     
-    public GameWorld()
+    public GameWorld4()
     {    
         super(1280, 720, 1);
         
@@ -169,8 +169,11 @@ public class GameWorld extends World
         
         //adding in the valid words into the array called valid. It calls the reader method of readThree, readFour or readFive  
       
-        valid = Reader.readThree(threeWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
         
+       
+        valid = Reader.readFour(fourWords, firstChar, secondChar, thirdChar, fourthChar, fifthChar, sixthChar, seventhChar, eighthChar, ninthChar, tenthChar, eleventhChar);
+        
+    
         //check marks
         xmark = new x();
         checkMark = new check(); 
@@ -244,6 +247,7 @@ public class GameWorld extends World
             //variables for changing the location 
             int x =  156; 
             int y = x + 55; 
+            int m = x + 110; 
             int z = 300; 
             
             //GreenfootImage image = new GreenfootImage("check mark.png", 20, null, null);
@@ -269,12 +273,18 @@ public class GameWorld extends World
                 //set the location to the second position 
                 let.get(a).setLocation(y,z);
             }
-            //if both false, set letter to third position 
-            else
+            //checks if the third position is claer
+            else if((let.get(b)).getX() != m && (let.get(c)).getX() != m && (let.get(d)).getX() != m && (let.get(e)).getX() != m && (let.get(f)).getX() != m && (let.get(g)).getX() != m && (let.get(h)).getX() != m && (let.get(i)).getX() != m && let.get((j)).getX() != m && let.get((k)).getX() != m)
             {
                 //set the location to the third position 
-                y = y + 50;
-                let.get(a).setLocation(x,z); 
+                let.get(a).setLocation(m,z);
+            }
+            //if both false, set letter to fourth position 
+            else
+            {
+                //set the location to the fourth position 
+                y = y + 100;
+                let.get(a).setLocation(y,z); 
             }
         }
     }
@@ -315,11 +325,11 @@ public class GameWorld extends World
         move(10,1,2,3,4,5,6,7,8,9,0); 
         
         //checker for words + this is the only part that isnt working as  need to make it if word size == into 4 and 5  
-        if(word.size() == 3)
+        if(word.size() == 4)
         {
             //loop to add the letters the user chose into an array
-            char[] compare = new char[3]; 
-            for(int i = 0; i < 3 ; i++ )
+            char[] compare = new char[4]; 
+            for(int i = 0; i < 4 ; i++ )
             {
                 compare[i] = word.dequeue(); 
             }
@@ -340,7 +350,7 @@ public class GameWorld extends World
                
                         
                 //loop to return the words back to its original position, clear the position arraylist for next word 
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < 4; i++)
                 {
                     (position.get(i)).setLocation(posi.dequeue(), 575);                     
                 }
@@ -363,7 +373,7 @@ public class GameWorld extends World
                 wrong.play(); 
 
                 //loop to return the words back to its original position, clear the position arraylist for next word 
-                for(int i = 0; i < 3; i++)
+                for(int i = 0; i < 4; i++)
                 {
                     (position.get(i)).setLocation(posi.dequeue(), 575);                     
                 }

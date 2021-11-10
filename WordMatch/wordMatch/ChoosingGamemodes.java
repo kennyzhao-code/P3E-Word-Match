@@ -46,36 +46,27 @@ public class ChoosingGamemodes extends World
         background.drawImage(hard, 850, 450);
     }
     
-    //variable to change the words in each gamemode 
-    public static int x = 0;
-    
     public void act()
     {
         //actually letting player choose gameworld so if their cursor is on it, the game behaves differently
         if(words3.touchingCursor())
         {
-            x = 3;
+          
             Greenfoot.setWorld(new GameWorld());
         }
         
         if(words4.touchingCursor())
         {
-            x = 4;
-            Greenfoot.setWorld(new GameWorld());
+       
+            Greenfoot.setWorld(new GameWorld4());
         }
         
         if(words5.touchingCursor())
         {
-            x = 5;
-            Greenfoot.setWorld(new GameWorld());
+        
+            Greenfoot.setWorld(new GameWorld5());
         }
         
     }
-    
-    
-    public static int numberWords() //to get the difficulty
-    {
-        return x;
-    }
-      
+
 }
