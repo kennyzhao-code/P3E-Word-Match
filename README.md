@@ -1,2 +1,2 @@
 # Word-Match
-Group members: Kenny Zhao, James Yung, Ethan Woo 
+Group members: Kenny Zhao and Ethan Woo 

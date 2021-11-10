@@ -37,7 +37,7 @@ public class GameWorld extends World
     //Data strucutres for changing location of letters 
     //Hashmap to store the positions of each letter 
     HashMap<Letters, Integer> pos = new HashMap<Letters, Integer>(); 
-    //Queue to put store and return back the positions of each integer 
+    //Queue to put store and return back the positions of each character
     Queue<Integer> posi = new Queue<Integer>();  
  
     
