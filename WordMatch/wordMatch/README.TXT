@@ -13,7 +13,9 @@ HOW TO START THIS PROJECT: With Greenfoot and start the game world.
 AUTHORS: Ethan Woo and Kenny Zhao
 USER INSTRUCTIONS: 
 
-Start the Greenfoot project and click on one of the buttons. If you would like to look at the instructions, go ahead and click the instructions
+Start the Greenfoot project and click on one of the buttons. If music is not playing, the user should start a new world by intiialzing a new game world with new MusicCommencer 
+then hitting the run button.  
+If you would like to look at the instructions, go ahead and click the instructions
 button. After that read the instructions and click back to go back to the main screen. Then, click play and it will bring you to difficulty select. That will lead you
 to 3 buttons that will select the difficulty. Click desired difficulty and start the game. 
 
