@@ -1,29 +1,52 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.HashMap; 
 /**
- * Write a description of class Letters here.
+ * Creates the letter objects which are images of letters. 
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @Ethan Woo and Kenny Zhao
+ * @Fall 2021
  */
 public class Letters extends Actor
 {
-    /**
-     * Act - do whatever the Letters wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    GreenfootImage tempImage;
+    GreenfootImage largeImage; 
+    GreenfootImage ogImage; 
+    HashMap<Character, GreenfootImage> letters;
+    HashMap<Character, GreenfootImage> largeLetters;
+    char thisChar; 
+    
     public Letters(char a)
     {
         String[] b = {"a.png", "b.png","c.png","d.png","e.png","f.png","g.png","h.png","i.png","j.png","k.png","l.png","m.png","n.png","o.png","p.png","q.png","r.png","s.png","t.png","u.png","v.png","w.png","x.png","y.png","z.png"};        
-        HashMap<Character, GreenfootImage> letters = new HashMap<Character, GreenfootImage>(); 
-        for(int i = 0; i < 26; i++)
+        
+        //An array of the images of letters
+        letters = new HashMap<Character, GreenfootImage>(); 
+        largeLetters = new HashMap<Character, GreenfootImage>(); 
+        //A hashmap to relate the image with the char value
+        for(int i = 0; i < 26; i++) //put all images along with the respective character
         {
             letters.put(b[i].charAt(0), new GreenfootImage(b[i])); 
         }
-        setImage(letters.get(a)); 
+        for(int i = 0; i < 26; i++) //put all images along with the respective character
+        {
+            tempImage = new GreenfootImage(b[i]);
+            tempImage.scale(60, 60); 
+            largeLetters.put(b[i].charAt(0), tempImage); 
+        }
+         //set this actor's image to its respective letter 
+        ogImage = letters.get(a);
+        setImage(ogImage);
+        largeImage = largeLetters.get(a);  
     }
     public void act()
     {
-        // Add your action code here.
+        if(Greenfoot.mouseMoved(this))
+        {
+            setImage(largeImage);  
+        }
+        if(Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
+        { 
+            setImage(ogImage); 
+        }
     }
 }

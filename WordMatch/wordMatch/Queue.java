@@ -1,5 +1,7 @@
 import java.util.Iterator;
 
+//Queue is used as a data structure that follows the First Out, Last In rule. 
+
 public class Queue<T> implements Iterable<T>
 {
     private Node first, last;
