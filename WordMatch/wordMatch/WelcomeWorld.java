@@ -25,13 +25,15 @@ public class WelcomeWorld extends World
         setBackground(background); 
         background.drawImage(title, 390, 220); //set the images and background
         
-        addObject(play, 400, 425); 
-        addObject(instructions, 880, 425); //add objects to the world
+        addObject(play, 500, 425); 
+        addObject(instructions,750, 425); //add objects to the world
         
+      
 
     }
     public void act()
     {
+        
         if(play.touchingCursor()) 
         {
             Greenfoot.setWorld(new ChoosingGamemodes()); //go to choosing difficulty 
