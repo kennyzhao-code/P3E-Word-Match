@@ -25,7 +25,7 @@ public class GameWorld extends World
     //Create new userInfo to store High Score
     public static UserInfo myInfo; 
     //score counter 
-    public int score = 0;
+    public static int score = 0;
     //mutiplier 
     public int mul = 1; 
     
@@ -76,7 +76,7 @@ public class GameWorld extends World
     
     
     //variables for timer for the game 
-    public int time = 15;
+    public int time = 30;
     SimpleTimer timer = new SimpleTimer();  
     int counter = 0; 
     
@@ -189,7 +189,7 @@ public class GameWorld extends World
         
         //adding the scorelabel 
         scoreLabel = new Label(0, 80); 
-        timerLabel = new Label(15, 80); 
+        timerLabel = new Label(30, 80); 
         multiplier = new Label(1,60); 
         letterx = new Label(" Multiplier: x", 50); 
         timeLeft = new Label("Time Left: ", 80);
@@ -205,7 +205,8 @@ public class GameWorld extends World
         addObject(scoreLeft,125, 50 ); 
         addObject(wordsDone, 1100, 150); 
         
-        
+        //set score to 0
+        score = 0;
         
     }
     
@@ -239,17 +240,10 @@ public class GameWorld extends World
     }
     
     //medthod that returns the score for the end screen 
-    public int score()
+    public static int score()
     {
         return score; 
     }
-    
-    //return the score for other methods. 
-    public int getScore()
-    {
-        return score; 
-    }
-    
     //method that moves the letters 
     public void move(int a, int b, int c, int d, int e, int f, int g, int h, int i, int j, int k) 
     {

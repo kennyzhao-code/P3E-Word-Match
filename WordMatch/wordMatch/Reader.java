@@ -8,7 +8,14 @@ import java.util.ArrayList;
 public class Reader  
 {
     BufferedReader in;
+    BufferedReader in2;
+    BufferedReader in3; 
+    BufferedReader in4; 
     static String urlName = "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english-no-swears.txt"; //create URL object
+    static String url2Name = "https://gist.githubusercontent.com/sirkets/7d89492826a0d245a086e8c5c56829a8/raw/307ef87315bf0360f682bf25821fdcf4fe71db8c/nouns.txt"; 
+    static String url3Name = "https://gist.githubusercontent.com/sirkets/2b7c3122db8c0bc08aa9e82a35175b3e/raw/16f6c7296d21910ee28cfcd637a9176f093e0da6/verbs.txt";
+    static String url4Name = "https://gist.githubusercontent.com/sirkets/2b7c3122db8c0bc08aa9e82a35175b3e/raw/16f6c7296d21910ee28cfcd637a9176f093e0da6/verbs.txt";
+    
     public static ArrayList<String> words = new ArrayList<String>();  //declare objects
     public Reader() //no constructor as we treated Reader as a holder of static methods
     {      
@@ -17,6 +24,9 @@ public class Reader
     public static void readInto() throws Exception 
     {
         URL url = new URL(urlName);
+        URL url2 = new URL(url2Name);
+        URL url3 = new URL(url3Name);
+        URL url4 = new URL(url4Name);
         BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream())); //read the URL
         String word;
         while ((word = in.readLine()) != null)
@@ -24,6 +34,27 @@ public class Reader
             words.add(word); //put into the arrayList
         }
         in.close(); //close the reader
+        BufferedReader in2 = new BufferedReader(new InputStreamReader(url2.openStream())); //read the URL
+        String word2;
+        while ((word2 = in2.readLine()) != null)
+        {
+            words.add(word2); //put into the arrayList
+        }
+        in2.close(); //close the reader
+        BufferedReader in3 = new BufferedReader(new InputStreamReader(url3.openStream())); //read the URL
+        String word3;
+        while ((word3 = in3.readLine()) != null)
+        {
+            words.add(word3); //put into the arrayList
+        }
+        in3.close(); //close the reader
+        BufferedReader in4 = new BufferedReader(new InputStreamReader(url4.openStream())); //read the URL
+        String word4;
+        while ((word4 = in4.readLine()) != null)
+        {
+            words.add(word4); //put into the arrayList
+        }
+        in4.close(); //close the reader
     }
     public static ArrayList<String> readNum(int x) //find the words with the right amount of letters
     {
