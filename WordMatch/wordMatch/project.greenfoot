@@ -72,11 +72,19 @@ dependency8.type=UsesDependency
 dependency9.from=GameWorld
 dependency9.to=x
 dependency9.type=UsesDependency
+<<<<<<< HEAD
 editor.fx.0.height=707
 editor.fx.0.width=816
 editor.fx.0.x=669
 editor.fx.0.y=213
 height=1055
+=======
+editor.fx.0.height=1056
+editor.fx.0.width=1936
+editor.fx.0.x=-8
+editor.fx.0.y=-8
+height=1056
+>>>>>>> kennys-changes
 package.numDependencies=24
 package.numTargets=18
 project.charset=windows-1252
