@@ -14,6 +14,7 @@ public class Letters extends Actor
     HashMap<Character, GreenfootImage> letters;
     HashMap<Character, GreenfootImage> largeLetters;
     char thisChar; 
+    
     public Letters(char a)
     {
         String[] b = {"a.png", "b.png","c.png","d.png","e.png","f.png","g.png","h.png","i.png","j.png","k.png","l.png","m.png","n.png","o.png","p.png","q.png","r.png","s.png","t.png","u.png","v.png","w.png","x.png","y.png","z.png"};        
@@ -41,10 +42,10 @@ public class Letters extends Actor
     {
         if(Greenfoot.mouseMoved(this))
         {
-            setImage(largeImage); 
+            setImage(largeImage);  
         }
         if(Greenfoot.mouseMoved(null) && !Greenfoot.mouseMoved(this))
-        {
+        { 
             setImage(ogImage); 
         }
     }

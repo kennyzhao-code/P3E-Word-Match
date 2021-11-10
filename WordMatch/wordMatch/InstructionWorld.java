@@ -26,7 +26,7 @@ public class InstructionWorld extends World
         background.setColor(Color.BLACK); //make a white rectangle with a black outline
         background.drawString("Instructions", 230, 170);
         background.setFont(textFont); 
-        background.drawString("1. Choose your difficulty (3, 4, or 5 letter words) and you will get 11 letters.", 230, 250);
+        background.drawString("1. Choose your difficulty (3, 4, or 5 letter words), you will get 11 letters in a box.", 230, 250);
         background.drawString("2. These letters are anagrams (can make up words). You will have 30 seconds.", 230, 300);
         background.drawString("3. Try to make all the possible word combinations by clicking on the letters.", 230, 350);
         background.drawString("4. You will get extra points for consecutive correct answers.", 230, 400);
